@@ -269,14 +269,15 @@
         const bodyBg = window.getComputedStyle(document.body || document.documentElement).backgroundColor;
         const htmlBg = window.getComputedStyle(document.documentElement).backgroundColor;
         
-        // Parsuj kolor RGB i sprawdź czy jest ciemny
+        // Parsuj kolor RGB(A) i sprawdź czy jest ciemny
         const parseRGB = (rgb) => {
-          const match = rgb.match(/\d+/g);
+          const match = rgb.match(/[\d.]+/g);
           if (match && match.length >= 3) {
             return {
               r: parseInt(match[0]),
               g: parseInt(match[1]),
-              b: parseInt(match[2])
+              b: parseInt(match[2]),
+              a: match.length >= 4 ? parseFloat(match[3]) : 1
             };
           }
           return null;
@@ -284,10 +285,13 @@
 
         const bodyColor = parseRGB(bodyBg);
         const htmlColor = parseRGB(htmlBg);
-        
+
         // Jeśli tło jest ciemne (średnia RGB < 100 - bardziej restrykcyjne), prawdopodobnie strona ma tryb ciemny
         const isDarkBackground = (color) => {
           if (!color) return false;
+          // Przezroczyste tło (alpha 0) to BRAK tła - biel pochodzi z elementu pod spodem.
+          // Bez tego rgba(0,0,0,0) było błędnie uznawane za czarne tło.
+          if (color.a === 0) return false;
           const avg = (color.r + color.g + color.b) / 3;
           return avg < 100; // Bardziej restrykcyjne niż 128
         };

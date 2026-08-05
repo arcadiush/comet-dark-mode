@@ -8,6 +8,11 @@ a projekt przestrzega [Semantic Versioning](https://semver.org/lang/pl/).
 ## [Nieopublikowane]
 
 ### Naprawiono
+- **Krytyczne: tryb ciemny nie włączał się na wielu stronach** (m.in. x-kom.pl).
+  `detectNativeDarkMode()` błędnie uznawał przezroczyste tło (`rgba(0,0,0,0)`) za
+  czarne — parser koloru ignorował kanał alpha — więc wtyczka "wykrywała" nieistniejący
+  tryb ciemny strony i pomijała włączenie. Parser uwzględnia teraz alpha: tło
+  przezroczyste = brak tła, nie ciemne. Zweryfikowane wizualnie na x-kom.pl
 - **Tryb "Analiza"** respektuje teraz wszystkie suwaki (nasycenie, obrót odcienia,
   szarość) oraz regułę dla elementów przezroczystych — wcześniej je pomijał i dawał
   gorszy efekt niż tryb "Filtr". Wprowadzono wspólną metodę `buildFilterValue()`

@@ -53,16 +53,20 @@
   Do czasu decyzji dokumentacja jawnie zaznacza, że realna analiza jest niezaimplementowana.
 
 ### Znane problemy i bugi
-- **Pułapka operacyjna (NIE bug w kodzie):** po przeładowaniu rozpakowanej wtyczki
-  na `chrome://extensions/` content script w już otwartych kartach jest osierocony —
-  przełącznik w popupie reaguje, ale strona się nie zmienia. Objaw "włączam tryb
-  ciemny, nic się nie dzieje". Lek: przeładuj wtyczkę **i odśwież kartę** (`Cmd+R`);
-  po zmianie `manifest.json` najlepiej usuń i dodaj wtyczkę ponownie, potem odśwież
-  karty. Weryfikacja: `F12` → Console → logi `[Comet Dark Mode]`. Zgłoszone w sesji
-  2026-08-05 jako regresja po zmianie ikon; okazało się przyczyną operacyjną.
-  Silnik zweryfikowany empirycznie (harness ładujący `dark-mode-engine.js`) —
-  oba tryby (Filtr i Analiza) poprawnie odwracają stronę; `manifest.json` poprawny,
-  wszystkie skrypty przechodzą `node --check`.
+- **[NAPRAWIONE 2026-08-05] Tryb ciemny nie włączał się na wielu stronach** (objaw:
+  "włączam, nic się nie dzieje", popup pokazuje "Aktywny", logi lecą, strona jasna).
+  KOREKTA wcześniejszej hipotezy: to NIE była pułapka operacyjna (osierocony skrypt),
+  tylko realny bug w `content.js`. `detectNativeDarkMode()` (krok 6) parsował kolor tła
+  ignorując alpha, więc `rgba(0,0,0,0)` (przezroczyste `html`/`body`, typowe dla wielu
+  witryn, m.in. x-kom.pl) było uznawane za czarne → fałszywe wykrycie natywnego dark
+  → pominięcie włączenia. Fix: parser uwzględnia alpha (alpha 0 = brak tła, nie ciemne).
+  Zweryfikowane: (a) jednostkowo (`rgba(0,0,0,0)`→nie-ciemne, `rgb(20,20,20)`→ciemne),
+  (b) wizualnie — x-kom.pl poprawnie się odwraca. Silnik i cała ścieżka `content.js`
+  wcześniej zweryfikowane harnessem (działały przy wymuszonym `enabled`), co pomogło
+  zawęzić problem właśnie do `detectNativeDarkMode()`.
+- Uwaga operacyjna (osobna sprawa): po przeładowaniu rozpakowanej wtyczki trzeba
+  odświeżyć wcześniej otwarte karty (content script się reinjectuje) — dobra praktyka,
+  ale NIE była przyczyną powyższego buga.
 - Tryb "Analiza" nie wykonuje realnej analizy CSS per-element mimo nazwy "Dokładny"
   (patrz sekcja "Decyzje do podjęcia")
 - `getElementSelector()` w `dark-mode-engine.js` — martwy kod (zaczątek analizy, nieużywany)
