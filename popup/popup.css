@@ -473,3 +473,15 @@ body.dark-mode .notification-text {
   color: #ffc107;
 }
 
+/* Stopka z autorem */
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: #999;
+  padding: 12px 0 2px;
+}
+
+body.dark-mode .footer {
+  color: #888;
+}
+
