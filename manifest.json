@@ -3,6 +3,7 @@
   "name": "Comet Dark Mode",
   "version": "1.1.0",
   "description": "Lekka i wydajna wtyczka do globalnego przełączania trybu ciemnego z inteligentną inwersją kolorów",
+  "author": "Arkadiusz Sobacki",
   "permissions": [
     "activeTab",
     "storage",
