@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comet Dark Mode</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Comet Dark Mode</h1>
+    </div>
+
+    <!-- Powiadomienie o wykryciu trybu ciemnego -->
+    <div class="notification" id="darkModeNotification" style="display: none;">
+      <div class="notification-content">
+        <span class="notification-icon">🌙</span>
+        <span class="notification-text">Ta strona ma już domyślnie włączony tryb ciemny</span>
+      </div>
+    </div>
+    
+    <div class="main-control">
+      <div class="toggle-container">
+        <label class="toggle-label" for="mainToggle">
+          <span class="toggle-text" id="toggleText">Wyłączony</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="mainToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="domain-status" id="domainStatus">
+      <span class="status-text">Sprawdzanie domeny...</span>
+    </div>
+
+    <!-- Suwaki kontroli -->
+    <div class="sliders-section" id="slidersSection" style="display: none;">
+      <div class="slider-control">
+        <label class="slider-label">
+          <span>Jasność</span>
+          <span class="slider-value" id="brightnessValue">0</span>
+        </label>
+        <input type="range" id="brightness" min="0" max="100" value="0" class="slider-input">
+      </div>
+
+      <div class="slider-control">
+        <label class="slider-label">
+          <span>Kontrast</span>
+          <span class="slider-value" id="contrastValue">100</span>
+        </label>
+        <input type="range" id="contrast" min="0" max="200" value="100" class="slider-input">
+      </div>
+
+      <div class="slider-control">
+        <label class="slider-label">
+          <span>Sepia</span>
+          <span class="slider-value" id="sepiaValue">0</span>
+        </label>
+        <input type="range" id="sepia" min="0" max="100" value="0" class="slider-input">
+      </div>
+
+      <div class="slider-control">
+        <label class="slider-label">
+          <span>Nasycenie</span>
+          <span class="slider-value" id="saturationValue">100</span>
+        </label>
+        <input type="range" id="saturation" min="0" max="200" value="100" class="slider-input">
+      </div>
+
+      <div class="slider-control">
+        <label class="slider-label">
+          <span>Obrót odcienia</span>
+          <span class="slider-value" id="hueRotateValue">0</span>
+        </label>
+        <input type="range" id="hueRotate" min="-180" max="180" value="0" class="slider-input">
+      </div>
+
+      <div class="slider-control">
+        <label class="slider-label">
+          <span>Szarość</span>
+          <span class="slider-value" id="grayscaleValue">0</span>
+        </label>
+        <input type="range" id="grayscale" min="0" max="100" value="0" class="slider-input">
+      </div>
+    </div>
+
+    <!-- Presety -->
+    <div class="presets-section" id="presetsSection" style="display: none;">
+      <div class="presets-label">Szybkie presety:</div>
+      <div class="presets-buttons" id="presetsButtons">
+        <!-- Presety będą dodane dynamicznie -->
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="addToWhitelist" class="btn btn-secondary">
+        Wyłącz na tej stronie
+      </button>
+      <button id="openOptions" class="btn btn-primary">
+        Opcje
+      </button>
+    </div>
+  </div>
+
+  <script src="../utils/storage.js"></script>
+  <script src="../utils/domain-matcher.js"></script>
+  <script src="../utils/presets.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
+

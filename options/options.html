@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opcje - Comet Dark Mode</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Comet Dark Mode</h1>
+      <p class="subtitle">Zaawansowane ustawienia trybu ciemnego</p>
+    </header>
+
+    <!-- Sekcja 1: Ręczna Kontrola -->
+    <section class="section">
+      <h2>Wygląd</h2>
+      <p class="control-hint" style="margin-bottom: 15px;">Zaznacz checkbox, aby suwak był widoczny w menu wtyczki</p>
+      
+      <div class="control-group">
+        <div class="slider-visibility-control">
+          <label class="checkbox-label">
+            <input type="checkbox" id="visibleBrightness" checked>
+            <span>Pokaż w menu</span>
+          </label>
+        </div>
+        <label class="control-label">
+          <span>Jasność</span>
+          <span class="value" id="brightnessValue">0</span>
+        </label>
+        <input type="range" id="brightness" min="0" max="100" value="0" class="slider-input">
+        <p class="control-hint">Reguluje ogólny poziom ciemności tła</p>
+      </div>
+
+      <div class="control-group">
+        <div class="slider-visibility-control">
+          <label class="checkbox-label">
+            <input type="checkbox" id="visibleContrast" checked>
+            <span>Pokaż w menu</span>
+          </label>
+        </div>
+        <label class="control-label">
+          <span>Kontrast</span>
+          <span class="value" id="contrastValue">100</span>
+        </label>
+        <input type="range" id="contrast" min="0" max="200" value="100" class="slider-input">
+        <p class="control-hint">Dostosowuje kontrast dla lepszej czytelności</p>
+      </div>
+
+      <div class="control-group">
+        <div class="slider-visibility-control">
+          <label class="checkbox-label">
+            <input type="checkbox" id="visibleSepia" checked>
+            <span>Pokaż w menu</span>
+          </label>
+        </div>
+        <label class="control-label">
+          <span>Sepia</span>
+          <span class="value" id="sepiaValue">0</span>
+        </label>
+        <input type="range" id="sepia" min="0" max="100" value="0" class="slider-input">
+        <p class="control-hint">Dodaje filtr sepii dla redukcji niebieskiego światła</p>
+      </div>
+
+      <div class="control-group">
+        <div class="slider-visibility-control">
+          <label class="checkbox-label">
+            <input type="checkbox" id="visibleSaturation" checked>
+            <span>Pokaż w menu</span>
+          </label>
+        </div>
+        <label class="control-label">
+          <span>Nasycenie</span>
+          <span class="value" id="saturationValue">100</span>
+        </label>
+        <input type="range" id="saturation" min="0" max="200" value="100" class="slider-input">
+        <p class="control-hint">Kontroluje intensywność kolorów (0 = szarość, 100 = normalne, 200 = wyższe nasycenie)</p>
+      </div>
+
+      <div class="control-group">
+        <div class="slider-visibility-control">
+          <label class="checkbox-label">
+            <input type="checkbox" id="visibleHueRotate" checked>
+            <span>Pokaż w menu</span>
+          </label>
+        </div>
+        <label class="control-label">
+          <span>Obrót odcienia</span>
+          <span class="value" id="hueRotateValue">0</span>
+        </label>
+        <input type="range" id="hueRotate" min="-180" max="180" value="0" class="slider-input">
+        <p class="control-hint">Zmienia paletę kolorów (-180 do 180 stopni)</p>
+      </div>
+
+      <div class="control-group">
+        <div class="slider-visibility-control">
+          <label class="checkbox-label">
+            <input type="checkbox" id="visibleGrayscale" checked>
+            <span>Pokaż w menu</span>
+          </label>
+        </div>
+        <label class="control-label">
+          <span>Szarość</span>
+          <span class="value" id="grayscaleValue">0</span>
+        </label>
+        <input type="range" id="grayscale" min="0" max="100" value="0" class="slider-input">
+        <p class="control-hint">Konwertuje kolory na odcienie szarości (0 = pełny kolor, 100 = szarość)</p>
+      </div>
+    </section>
+
+    <!-- Sekcja 2: Automatyzacja -->
+    <section class="section">
+      <h2>Automatyzacja</h2>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="automation" value="system" id="automationSystem" checked>
+          <span>Synchronizacja z ustawieniami systemowymi</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="automation" value="schedule" id="automationSchedule">
+          <span>Harmonogram czasowy</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="automation" value="geolocation" id="automationGeolocation">
+          <span>Położenie geograficzne (zachód słońca)</span>
+        </label>
+      </div>
+
+      <!-- Harmonogram -->
+      <div class="automation-settings" id="scheduleSettings" style="display: none;">
+        <div class="control-group">
+          <label class="control-label">Godzina rozpoczęcia</label>
+          <input type="time" id="scheduleStart" value="20:00" class="time-input">
+        </div>
+        <div class="control-group">
+          <label class="control-label">Godzina zakończenia</label>
+          <input type="time" id="scheduleEnd" value="08:00" class="time-input">
+        </div>
+      </div>
+
+      <!-- Geolokalizacja -->
+      <div class="automation-settings" id="geolocationSettings" style="display: none;">
+        <div class="control-group">
+          <label class="control-label">Szerokość geograficzna</label>
+          <input type="number" id="geolocationLat" step="0.0001" class="number-input" placeholder="np. 52.2297">
+        </div>
+        <div class="control-group">
+          <label class="control-label">Długość geograficzna</label>
+          <input type="number" id="geolocationLng" step="0.0001" class="number-input" placeholder="np. 21.0122">
+        </div>
+        <button id="getLocation" class="btn btn-secondary">Użyj mojej lokalizacji</button>
+      </div>
+    </section>
+
+    <!-- Sekcja 3: Listy -->
+    <section class="section">
+      <h2>Zarządzanie Wyjątkami</h2>
+      
+      <div class="control-group">
+        <label class="control-label" for="whitelist">Biała Lista (wyłączone domeny)</label>
+        <textarea id="whitelist" class="textarea-input" rows="4" placeholder="youtube.com&#10;google.com/maps&#10;example.com"></textarea>
+        <p class="control-hint">Jedna domena na linię. Wtyczka będzie wyłączona na tych stronach.</p>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="blacklist">Czarna Lista (zawsze włączone domeny)</label>
+        <textarea id="blacklist" class="textarea-input" rows="4" placeholder="example.com&#10;*.example.com"></textarea>
+        <p class="control-hint">Jedna domena na linię. Wtyczka będzie zawsze włączona na tych stronach.</p>
+      </div>
+    </section>
+
+    <!-- Sekcja 4: Zaawansowane -->
+    <section class="section">
+      <h2>Zaawansowane</h2>
+
+      <div class="control-group">
+        <label class="control-label" for="renderEngine">Silnik renderowania</label>
+        <select id="renderEngine" class="select-input">
+          <option value="filter">Filtr (Szybki)</option>
+          <option value="analyze">Analiza</option>
+        </select>
+        <p class="control-hint">Tryb 'Filtr' stosuje inwersję na całej stronie. 'Analiza' daje obecnie ten sam efekt, dodatkowo cache'uje CSS per URL (realna analiza per-element niezaimplementowana).</p>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="currentDomain">Ustawienia per-domena</label>
+        <div class="per-domain-controls">
+          <input type="text" id="currentDomain" class="text-input" placeholder="example.com" readonly>
+          <button id="addPerDomain" class="btn btn-secondary">Dodaj ustawienia</button>
+        </div>
+        <div id="perDomainList" class="per-domain-list"></div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="customCSS">Własne reguły CSS</label>
+        <div class="per-domain-controls">
+          <input type="text" id="cssDomain" class="text-input" placeholder="example.com" readonly>
+          <button id="addCustomCSS" class="btn btn-secondary">Dodaj CSS</button>
+        </div>
+        <textarea id="customCSS" class="textarea-input code-textarea" rows="6" placeholder="/* Własne reguły CSS dla tej domeny */&#10;.example { color: red; }"></textarea>
+        <div id="customCSSList" class="per-domain-list"></div>
+      </div>
+    </section>
+
+    <!-- Sekcja 5: Presety -->
+    <section class="section">
+      <h2>Presety</h2>
+      <p class="control-hint" style="margin-bottom: 15px;">Zapisz aktualne ustawienia jako preset dla szybkiego przełączania</p>
+      
+      <div class="control-group">
+        <div class="per-domain-controls">
+          <input type="text" id="presetName" class="text-input" placeholder="Nazwa presetu">
+          <button id="savePreset" class="btn btn-secondary">Zapisz jako preset</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Dostępne presety:</label>
+        <div id="presetsList" class="per-domain-list"></div>
+      </div>
+    </section>
+
+    <!-- Sekcja 6: Eksport/Import -->
+    <section class="section">
+      <h2>Eksport i Import</h2>
+      <p class="control-hint" style="margin-bottom: 15px;">Zapisz swoje ustawienia jako backup lub przenieś je na inne urządzenie</p>
+      
+      <div class="control-group">
+        <button id="exportBtn" class="btn btn-primary">Eksportuj ustawienia</button>
+        <p class="control-hint">Pobierz plik JSON z wszystkimi ustawieniami</p>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="importFile">Importuj ustawienia</label>
+        <input type="file" id="importFile" accept=".json" style="display: none;">
+        <button id="importBtn" class="btn btn-secondary" onclick="document.getElementById('importFile').click()">Wybierz plik JSON</button>
+        <p class="control-hint">Załaduj ustawienia z pliku JSON</p>
+      </div>
+    </section>
+
+    <!-- Przyciski akcji -->
+    <section class="section">
+      <div class="actions">
+        <button id="saveBtn" class="btn btn-primary">Zapisz</button>
+        <button id="resetBtn" class="btn btn-secondary">Resetuj do domyślnych</button>
+      </div>
+      <div id="saveStatus" class="save-status"></div>
+    </section>
+  </div>
+
+  <script src="../utils/storage.js"></script>
+  <script src="../utils/domain-matcher.js"></script>
+  <script src="../utils/presets.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
+
