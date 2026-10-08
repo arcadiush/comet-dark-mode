@@ -22,14 +22,17 @@ obrazów, wideo i iframe. Bez zewnętrznych zależności.
 ```
 Comet/
 ├── manifest.json              # Manifest V3, uprawnienia, rejestracja skryptów
-├── icons/                     # Ikony (light/dark, 16/48/128 px)
+├── icons/                     # Ikony słoneczka icon-16/32/48/128.png (źródło: sun-source.svg);
+│                              #   stare icon-light-*/icon-dark-* zachowane, nieużywane
 ├── popup/                     # Panel popup (popup.html/.css/.js — 628 linii JS)
 ├── options/                   # Strona opcji (options.html/.css/.js — 808 linii JS)
 ├── content/
-│   ├── content.js             # Content script — orkiestracja, wykrywanie native dark (829 linii)
-│   └── dark-mode-engine.js    # Silnik inwersji kolorów (325 linii)
+│   ├── content.js             # Content script — orkiestracja, wykrywanie native dark (833 linie)
+│   └── dark-mode-engine.js    # Silnik inwersji kolorów (339 linii)
 ├── background/
 │   └── background.js          # Service worker — skróty, alarmy, sync (366 linii)
+├── docs/ARCHITECTURE.md       # Architektura, przepływ danych, decyzje
+├── blog/                      # Wpis blogowy o wtyczce + zrzuty ekranu
 └── utils/
     ├── storage.js             # Warstwa dostępu do chrome.storage (228 linii)
     ├── domain-matcher.js      # Dopasowanie whitelist/blacklist (130 linii)
@@ -52,12 +55,18 @@ Kolejność ładowania content scripts (z `manifest.json`):
 - Presety (wbudowane: Ciemny, Ciepły, Wysoki kontrast, Delikatny + własne)
 - Eksport / import ustawień do JSON
 - Wykrywanie natywnego dark mode strony (`detectNativeDarkMode()`) + powiadomienia
+  (fix 2026-08-05: przezroczyste tło `rgba(0,0,0,0)` nie jest już uznawane za ciemne)
+- Nowe ikony słoneczka (czytelne na jasnym i ciemnym pasku), autor w `manifest.json`
+  i stopka z autorem w popupie (2026-08-05)
+- Wpis blogowy `blog/comet-dark-mode.md` ze zrzutami (2026-08-05)
 
 ### [-] W trakcie
-- [DO UZUPEŁNIENIA] — brak aktywnie prowadzonego wątku (ostatnie zmiany: 15–16 lis 2025)
+- [DO UZUPEŁNIENIA] — brak aktywnie prowadzonego wątku (ostatnie zmiany w kodzie: 5 sie 2026)
 
 ### [ ] Planowane / do zrobienia
 - Uzupełnić daty wydań w `CHANGELOG.md` (obecnie `2024-12-XX`, `2024-XX-XX`)
+- Zweryfikować w przeglądarce oba silniki z ustawionym nasyceniem/szarością
+- Decyzja: tryb "Analiza" dokończyć (realna analiza CSS) czy usunąć — patrz `PROGRESS.md`
 - [DO UZUPEŁNIENIA] — pozostałe priorytety ustalane per sesja w `PROGRESS.md`
 
 ## Konwencje i zasady kodu
@@ -74,6 +83,8 @@ Kolejność ładowania content scripts (z `manifest.json`):
 - Ikony są wymagane do załadowania wtyczki — ich brak = błąd ładowania (patrz `INSTALACJA.md`)
 - W Firefoksie wtyczka ładowana tymczasowo (znika po zamknięciu przeglądarki bez pakowania `.xpi`)
 - Daty w `CHANGELOG.md` niekompletne
+- Tryb "Analiza" daje ten sam efekt co "Filtr" (różni je tylko cache per URL)
+- `getElementSelector()` w `dark-mode-engine.js` — martwy kod (zaczątek analizy)
 - [DO UZUPEŁNIENIA] — bugi zgłaszane w trakcie sesji dopisywać do `PROGRESS.md`
 
 ## Instrukcja dla Claude

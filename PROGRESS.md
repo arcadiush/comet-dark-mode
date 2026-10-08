@@ -1,5 +1,20 @@
 # Postęp prac — Comet Dark Mode
 
+## 2026-10-08
+
+### Ukończone
+- Przegląd stanu repo: od 2026-08-05 brak zmian w kodzie (git czysty, zmienił się
+  tylko `.DS_Store`)
+- Aktualizacja `CLAUDE.md`: liczby linii (`content.js` 833, `dark-mode-engine.js` 339),
+  nowe ikony i katalogi `docs/` + `blog/` w strukturze, prace z 2026-08-05 w "Ukończone",
+  data ostatnich zmian, zadania i znane problemy zsynchronizowane z tym plikiem
+- Uzupełnienie brakującej historii: 2026-08-05 dodano też autora w `manifest.json`
+  (commit `e758569`) i stopkę z autorem w popupie (`popup.html`/`popup.css`, `62acf10`)
+
+### Do zrobienia
+- Bez zmian względem wpisu z 2026-08-05 (daty w `CHANGELOG.md`, test silników
+  w przeglądarce, decyzja o trybie "Analiza")
+
 ## 2026-08-05
 
 ### Ukończone
