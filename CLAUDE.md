@@ -6,7 +6,7 @@ Lekka wtyczka do przeglądarek (Chrome, Edge, Firefox) do globalnego przełącza
 trybu ciemnego z inteligentną inwersją kolorów. Zachowuje oryginalne kolory
 obrazów, wideo i iframe. Bez zewnętrznych zależności.
 
-**Wersja:** 1.2.1 · Manifest V3
+**Wersja:** 1.2.2 · Manifest V3
 
 ## Stack techniczny
 

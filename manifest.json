@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Comet Dark Mode",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Lekka i wydajna wtyczka do globalnego przełączania trybu ciemnego z inteligentną inwersją kolorów",
   "author": "Arkadiusz Sobacki",
   "permissions": [
@@ -21,7 +21,10 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "comet-dark-mode@sobacki",
-      "strict_min_version": "121.0"
+      "strict_min_version": "121.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   },
   "content_scripts": [

@@ -2,7 +2,7 @@
 
 Lekka i wydajna wtyczka do przeglądarek (Chrome, Firefox, Edge) umożliwiająca globalne przełączanie trybu ciemnego z inteligentną inwersją kolorów.
 
-**Aktualna wersja:** 1.2.1 | [Historia zmian (CHANGELOG)](CHANGELOG.md)
+**Aktualna wersja:** 1.2.2 | [Historia zmian (CHANGELOG)](CHANGELOG.md)
 
 ## Funkcjonalności
 

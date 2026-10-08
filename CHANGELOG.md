@@ -7,6 +7,12 @@ a projekt przestrzega [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Nieopublikowane]
 
+## [1.2.2] - 2026-10-08
+
+### Dodano
+- Deklaracja `data_collection_permissions: none` w `browser_specific_settings.gecko`
+  — wymagana przez addons.mozilla.org dla nowych wtyczek (wtyczka nie zbiera danych)
+
 ## [1.2.1] - 2026-10-08
 
 ### Naprawiono
