@@ -49,7 +49,7 @@ Kolejność ładowania content scripts (z `manifest.json`):
 
 ## Aktualny stan
 
-### [x] Ukończone (v1.2.0)
+### [x] Ukończone (v1.2.3)
 - Globalny przełącznik trybu ciemnego (popup + skrót `Ctrl/Cmd+Shift+D`)
 - Silnik **Filtr** (`filter: invert()` na `html`, media odwracane z powrotem); tryb "Analiza" usunięty 2026-10-08
 - Regulacje: jasność, kontrast, sepia, nasycenie, obrót odcienia, szarość
@@ -62,11 +62,20 @@ Kolejność ładowania content scripts (z `manifest.json`):
 - Nowe ikony słoneczka (czytelne na jasnym i ciemnym pasku), autor w `manifest.json`
   i stopka z autorem w popupie (2026-08-05)
 - Wpis blogowy `blog/comet-dark-mode.md` ze zrzutami (2026-08-05)
+- 2026-10-08: usunięty tryb „Analiza”; naprawione: suwaki na 0, przyciski w opcjach (CSP),
+  biały błysk (`document_start`), ikona na pasku (kolorowe/szare słońce z `background.js`),
+  edytor CSS; mniej uprawnień; ciche logi; jeden manifest dla Chrome i Firefoksa 140+
+- 2026-10-08: repo publiczne (https://github.com/arcadiush/comet-dark-mode, MIT, `PRIVACY.md`),
+  pakiet do sklepów (`package.sh`, `store/`), zgłoszenia do AMO i Chrome Web Store
 
 ### [-] W trakcie
-- [DO UZUPEŁNIENIA] — brak aktywnie prowadzonego wątku (ostatnie zmiany w kodzie: 5 sie 2026)
+- Recenzje w sklepach (wersja 1.2.3): addons.mozilla.org (do 24 h) i Chrome Web Store
+  (do ~2 tygodni) — czekamy na e-maile; kolejne wersje: `./package.sh` → wgrać zip jako aktualizację
 
 ### [ ] Planowane / do zrobienia
+- Podmienić wpis na blogu użytkownika (jeden silnik + nowy `blog/images/opcje.png`)
+- Złagodzić w README/CLAUDE „zachowuje oryginalne kolory obrazów” (patrz Znane problemy)
+- Usunąć martwy kod: pusty MutationObserver w `content/content.js`, nieładowany `utils/automation.js`
 - Uzupełnić daty wydań w `CHANGELOG.md` (obecnie `2024-12-XX`, `2024-XX-XX`)
 - [DO UZUPEŁNIENIA] — pozostałe priorytety ustalane per sesja w `PROGRESS.md`
 
@@ -86,7 +95,10 @@ Kolejność ładowania content scripts (z `manifest.json`):
 ## Znane problemy i bugi
 
 - Ikony są wymagane do załadowania wtyczki — ich brak = błąd ładowania (patrz `INSTALACJA.md`)
-- W Firefoksie wtyczka ładowana tymczasowo (znika po zamknięciu przeglądarki bez pakowania `.xpi`)
+- W Firefoksie wersja z `about:debugging` jest tymczasowa — na stałe po publikacji w AMO
+- Zdjęcia po podwójnej inwersji (`invert + hue-rotate`) nie są identyczne z oryginałem
+  (ograniczenie CSS); suwak jasności przyciemnia też obrazy
+- Firefox ostrzega o ignorowanym `background.service_worker` — celowe (potrzebne dla Chrome)
 - Daty w `CHANGELOG.md` niekompletne
 - [DO UZUPEŁNIENIA] — bugi zgłaszane w trakcie sesji dopisywać do `PROGRESS.md`
 

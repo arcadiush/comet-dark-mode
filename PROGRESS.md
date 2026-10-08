@@ -2,7 +2,10 @@
 
 ## 2026-10-08
 
-### Ukończone
+Sesja: analiza wtyczki → testy silników → naprawy (v1.2.0–1.2.3) → publikacja repo
+i zgłoszenia do addons.mozilla.org oraz Chrome Web Store.
+
+### Ukończone w tej sesji
 - Przegląd stanu repo: od 2026-08-05 brak zmian w kodzie (git czysty, zmienił się
   tylko `.DS_Store`)
 - Aktualizacja `CLAUDE.md`: liczby linii (`content.js` 833, `dark-mode-engine.js` 339),
@@ -65,13 +68,11 @@
      inwersja (`invert + hue-rotate`) nie odtwarza zdjęć 1:1 — teksty mówią „bez efektu
      negatywu” zamiast „bez zmian”
   5. `store/privacy-policy.html` — PL+EN, zgodna z kodem (brak sieci, storage.sync,
-     geolokalizacja tylko lokalnie). Placeholder na e-mail. Repo prywatne → hosting do ustalenia
+     geolokalizacja tylko lokalnie). Później: `PRIVACY.md` w publicznym repo, kontakt = GitHub Issues
 - **Wersja 1.2.0** (manifest, README, CLAUDE, CHANGELOG). Zasada od teraz: każda zmiana
   = podbicie wersji (poprawka → patch)
 - Edytor CSS: jeden listener + `editedCSSDomain` zamiast listenera przy każdym otwarciu.
   Test: 3 domeny edytowane po kolei, każda zapisuje tylko swój tekst
-- (stara notatka) NIE zweryfikowane w prawdziwej wtyczce: brak błysku (harness nie mierzy pierwszego
-  malowania) — do sprawdzenia przez użytkownika
 
 - **Repo upublicznione** (https://github.com/arcadiush/comet-dark-mode). Przed tym audyt
   całej historii: brak sekretów/IP/nazw serwerów; usunięta lokalna ścieżka z `INSTALACJA.md`;
@@ -93,8 +94,13 @@
   będzie opóźnione” (szerokie uprawnienia hostów) zaakceptowane: `activeTab` zepsułby
   automatyczne przyciemnianie. Dodana ikona sklepu z marginesem `store/images/store-icon-128.png`
 
-### Do zrobienia
-- Chrome Web Store: czekać na wynik recenzji (e-mail od Google, do ~2 tygodni)
+### Przerwane / W trakcie
+- Publikacja w sklepach — czeka na recenzje, nic do zrobienia po naszej stronie:
+  addons.mozilla.org (1.2.3, do 24 h) i Chrome Web Store (1.2.3, do ~2 tygodni,
+  „publikowanie opóźnione” przez `<all_urls>`)
+
+### Na następną sesję
+- Sprawdzić e-maile od Mozilli i Google; przy odrzuceniu — poprawki wg uwag recenzenta
 - Podmienić wpis na blogu użytkownika (opis jednego silnika + nowy `opcje.png`)
 - README/CLAUDE obiecują „zachowuje oryginalne kolory obrazów” — w praktyce lekko się
   zmieniają (ograniczenie `hue-rotate`); złagodzić opis albo poprawić silnik
@@ -102,6 +108,20 @@
   (nigdzie nieładowany)
 - Strona natywnie ciemna (np. GitHub w trybie ciemnym) → sprawdzić powiadomienie w prawdziwej wtyczce
 - Daty w `CHANGELOG.md` (pominięte na razie — brak dat wydań w git)
+
+### Napotkane problemy
+- Chrome 152 nie ładuje rozpakowanych wtyczek z linii poleceń → testy na harnessie
+  (strony testowe + atrapa `chrome.*` + prawdziwe pliki wtyczki), finalne potwierdzenie
+  przez użytkownika w prawdziwej przeglądarce
+- Headless Chrome (`--screenshot`) zapisuje plik, ale nie kończy procesu → `perl -e 'alarm 25'`
+  jako limit czasu + `pkill`
+- Chrome blokuje rozszerzeniom (Claude in Chrome) strony Chrome Web Store („extensions
+  gallery cannot be scripted”) → formularz CWS wypełnił użytkownik; AMO wypełnił Claude
+- AMO: kliknięcie „Edytuj” w sekcji Obrazy przez narzędzie nie otwierało edytora →
+  `element.click()` przez JS. `form_input` wpisał adres pomocy do ukrytego pola `_init`
+  zamiast `_pl` → poprawione przez JS i zweryfikowane odczytem wartości formularza
+- Podwójna inwersja (`invert(1) hue-rotate(180deg)` ×2) nie odtwarza zdjęć 1:1 —
+  ograniczenie CSS, nie naprawione; opisy w sklepach złagodzone
 
 ## 2026-08-05
 
