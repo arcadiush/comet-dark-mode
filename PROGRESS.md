@@ -74,13 +74,15 @@
   malowania) — do sprawdzenia przez użytkownika
 
 ### Do zrobienia
-- Test w prawdziwej wtyczce: ikona włącz/wyłącz (popup i `Cmd+Shift+D`), strona
-  natywnie ciemna (np. GitHub w trybie ciemnym) → powiadomienie
+- Opublikować `store/privacy-policy.html` (blog / własny serwer) i wpisać e-mail kontaktowy
+- Założyć konta (CWS: 5 USD, AMO: darmowe) i wgrać `dist/comet-dark-mode-1.2.2.zip` — robi użytkownik
+- Podmienić wpis na blogu użytkownika (opis jednego silnika + nowy `opcje.png`)
+- README/CLAUDE obiecują „zachowuje oryginalne kolory obrazów” — w praktyce lekko się
+  zmieniają (ograniczenie `hue-rotate`); złagodzić opis albo poprawić silnik
+- Martwy kod: MutationObserver w `content.js` (pusty callback), `utils/automation.js`
+  (nigdzie nieładowany)
+- Strona natywnie ciemna (np. GitHub w trybie ciemnym) → sprawdzić powiadomienie w prawdziwej wtyczce
 - Daty w `CHANGELOG.md` (pominięte na razie — brak dat wydań w git)
-- Zrzut `blog/images/opcje.png` nadal pokazuje wybór silnika — do odświeżenia
-- MutationObserver w `content.js` (~l. 785–800) ma pusty callback — nic nie robi
-- ~~Test w prawdziwej wtyczce~~ — potwierdzone przez użytkownika 2026-10-08:
-  Analiza + suwak nasycenia na żywo do 0% działa
 
 ## 2026-08-05
 
