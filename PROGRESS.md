@@ -54,6 +54,18 @@
   Jeden manifest dla obu przeglądarek. Docs: README, CLAUDE, INSTALACJA (uprawnienia
   do stron w Firefoksie). Zweryfikowane przez użytkownika: działa w Firefoksie i Chrome
 - Wypchnięto na GitHub `main` + tag `v1.2.0` (na prośbę użytkownika)
+- **Przygotowanie do sklepów (Chrome Web Store + addons.mozilla.org)**:
+  1. Wersja 1.2.2: `data_collection_permissions: none` w `gecko` (wymóg AMO)
+  2. `package.sh` → `dist/comet-dark-mode-<wersja>.zip` (28 plików, tylko to, co ładuje
+     przeglądarka; `dist/` w `.gitignore`). Sprawdzone: wszystkie pliki z manifestu i HTML są w zip
+  3. `store/listing.md` — krótki/pełny opis PL+EN, kategorie, single purpose, uzasadnienia
+     uprawnień, deklaracje danych, notatka dla recenzenta AMO
+  4. `store/images/` — 3 zrzuty 1280×800 (przed/po, panel, opcje) + kafelek 440×280;
+     render headless Chrome z atrapą chrome.* i prawdziwym silnikiem. Odkrycie: podwójna
+     inwersja (`invert + hue-rotate`) nie odtwarza zdjęć 1:1 — teksty mówią „bez efektu
+     negatywu” zamiast „bez zmian”
+  5. `store/privacy-policy.html` — PL+EN, zgodna z kodem (brak sieci, storage.sync,
+     geolokalizacja tylko lokalnie). Placeholder na e-mail. Repo prywatne → hosting do ustalenia
 - **Wersja 1.2.0** (manifest, README, CLAUDE, CHANGELOG). Zasada od teraz: każda zmiana
   = podbicie wersji (poprawka → patch)
 - Edytor CSS: jeden listener + `editedCSSDomain` zamiast listenera przy każdym otwarciu.

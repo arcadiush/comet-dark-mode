@@ -14,7 +14,7 @@ Wersja PL jako główna, EN jako drugi język (oba sklepy pozwalają dodać tłu
 | Kategoria AMO | Wygląd (Appearance) |
 | Licencja AMO | do wyboru przez autora (brak pliku LICENSE w repo) |
 | Strona domowa | do uzupełnienia (np. wpis na blogu) |
-| Polityka prywatności | adres strony z `store/privacy-policy.html` |
+| Polityka prywatności | adres, pod którym opublikujesz `store/privacy-policy.html` (repo jest prywatne — link do GitHuba nie zadziała). Przed publikacją wpisz e-mail w miejsce `[ADRES E-MAIL]` / `[E-MAIL ADDRESS]` |
 | Grafiki | `store/images/` (zrzuty 1280×800, kafelek 440×280) |
 | Paczka | `./package.sh` → `dist/comet-dark-mode-<wersja>.zip` |
 

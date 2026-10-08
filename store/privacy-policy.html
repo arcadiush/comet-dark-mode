@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comet Dark Mode — polityka prywatności</title>
+<meta name="description" content="Polityka prywatności wtyczki Comet Dark Mode: wtyczka nie zbiera, nie wysyła i nie sprzedaje żadnych danych.">
+<style>
+  :root { --bg: #fbfaf7; --text: #23211d; --muted: #6b665c; --line: #e6e1d6; --accent: #b45309; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #17161a; --text: #e9e6df; --muted: #a29d92; --line: #2e2c30; --accent: #f59e0b; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.7 -apple-system, 'Segoe UI', system-ui, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 48px 20px 72px; }
+  h1, h2 { font-family: Georgia, 'Times New Roman', serif; line-height: 1.25; }
+  h1 { font-size: 34px; margin: 0 0 6px; }
+  h2 { font-size: 22px; margin: 40px 0 8px; }
+  .meta { color: var(--muted); font-size: 15px; margin: 0 0 32px; }
+  .lead { font-size: 19px; padding: 16px 20px; border-left: 4px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); border-radius: 4px; }
+  ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+  code { font-size: 15px; background: color-mix(in srgb, var(--muted) 15%, transparent); padding: 1px 6px; border-radius: 4px; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 56px 0; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main>
+
+<article lang="pl">
+  <h1>Polityka prywatności — Comet Dark Mode</h1>
+  <p class="meta">Obowiązuje od 8 października 2026 · <a href="#en">English version below</a></p>
+
+  <p class="lead">Comet Dark Mode nie zbiera, nie wysyła i nie sprzedaje żadnych danych. Wtyczka nie łączy się z żadnym serwerem, nie używa analityki ani plików cookie.</p>
+
+  <h2>Kto odpowiada za wtyczkę</h2>
+  <p>Autor wtyczki: Arkadiusz Sobacki. Kontakt w sprawach prywatności: [ADRES E-MAIL].</p>
+
+  <h2>Jakie dane przechowuje wtyczka</h2>
+  <p>Wtyczka zapisuje wyłącznie swoje ustawienia, w pamięci przeglądarki (<code>storage</code>):</p>
+  <ul>
+    <li>stan włączenia, wartości suwaków (jasność, kontrast, sepia, nasycenie, odcień, szarość) i presety,</li>
+    <li>listy stron z wyjątkami, ustawienia dla wybranych domen i własne reguły CSS,</li>
+    <li>ustawienia automatyzacji: godziny harmonogramu albo współrzędne geograficzne.</li>
+  </ul>
+  <p>Jeśli masz włączoną synchronizację w przeglądarce, przeglądarka może synchronizować te ustawienia między Twoimi urządzeniami przez Twoje konto Google lub Mozilla. Odbywa się to na zasadach dostawcy przeglądarki — autor wtyczki nie ma dostępu do tych danych.</p>
+
+  <h2>Lokalizacja</h2>
+  <p>Współrzędne są potrzebne tylko do automatycznego włączania trybu ciemnego od zachodu do wschodu słońca. Możesz je wpisać ręcznie albo kliknąć przycisk pobrania lokalizacji — wtedy przeglądarka zapyta o zgodę. Współrzędne są zaokrąglane do 4 miejsc po przecinku, zapisywane razem z ustawieniami i służą wyłącznie do obliczenia godziny zachodu i wschodu słońca na Twoim urządzeniu.</p>
+
+  <h2>Treść odwiedzanych stron</h2>
+  <p>Wtyczka nakłada na stronę filtr CSS, który odwraca kolory. Żeby nie odwracać stron, które same mają tryb ciemny, sprawdza ich kolor tła i oznaczenia motywu (np. klasę <code>dark</code>). Nie czyta tekstu stron, formularzy ani historii przeglądania i niczego z nich nie zapisuje ani nie wysyła.</p>
+
+  <h2>Uprawnienia</h2>
+  <ul>
+    <li><strong>Dostęp do wszystkich stron</strong> — żeby nałożyć tryb ciemny na każdą odwiedzaną stronę.</li>
+    <li><strong>storage</strong> — zapis ustawień opisanych wyżej.</li>
+    <li><strong>tabs, activeTab</strong> — pokazanie domeny bieżącej karty w panelu i natychmiastowe zastosowanie zmian w otwartych kartach.</li>
+    <li><strong>alarms</strong> — automatyczne włączanie i wyłączanie według harmonogramu.</li>
+  </ul>
+
+  <h2>Usunięcie danych</h2>
+  <p>Wszystkie ustawienia znikają po odinstalowaniu wtyczki. Możesz je też przywrócić do domyślnych przyciskiem „Resetuj do domyślnych” w opcjach wtyczki.</p>
+
+  <h2>Zmiany polityki</h2>
+  <p>O zmianach tej polityki informuje data na górze strony.</p>
+</article>
+
+<hr>
+
+<article id="en" lang="en">
+  <h1>Privacy Policy — Comet Dark Mode</h1>
+  <p class="meta">Effective October 8, 2026</p>
+
+  <p class="lead">Comet Dark Mode does not collect, send or sell any data. The extension does not connect to any server and uses no analytics or cookies.</p>
+
+  <h2>Who is responsible</h2>
+  <p>Author: Arkadiusz Sobacki. Privacy contact: [E-MAIL ADDRESS].</p>
+
+  <h2>What the extension stores</h2>
+  <p>The extension stores only its own settings in browser storage (<code>storage</code>):</p>
+  <ul>
+    <li>on/off state, slider values (brightness, contrast, sepia, saturation, hue, grayscale) and presets,</li>
+    <li>site exception lists, per-domain settings and custom CSS rules,</li>
+    <li>automation settings: schedule times or geographic coordinates.</li>
+  </ul>
+  <p>If browser sync is enabled, your browser may sync these settings across your devices through your Google or Mozilla account. This is governed by your browser provider — the author of the extension has no access to this data.</p>
+
+  <h2>Location</h2>
+  <p>Coordinates are needed only to turn dark mode on automatically from sunset to sunrise. You can enter them manually or click the button to get your location — your browser will then ask for permission. Coordinates are rounded to 4 decimal places, stored with the other settings and used only to calculate sunset and sunrise times on your device.</p>
+
+  <h2>Content of visited pages</h2>
+  <p>The extension applies a CSS filter that inverts page colors. To avoid inverting sites that already have a dark theme, it checks their background color and theme markers (e.g. a <code>dark</code> class). It does not read page text, forms or browsing history, and does not store or send anything from them.</p>
+
+  <h2>Permissions</h2>
+  <ul>
+    <li><strong>Access to all websites</strong> — to apply dark mode to any page you visit.</li>
+    <li><strong>storage</strong> — to save the settings described above.</li>
+    <li><strong>tabs, activeTab</strong> — to show the current tab's domain in the popup and apply changes to open tabs immediately.</li>
+    <li><strong>alarms</strong> — to switch dark mode on and off on a schedule.</li>
+  </ul>
+
+  <h2>Deleting data</h2>
+  <p>All settings are removed when you uninstall the extension. You can also restore defaults with the "Resetuj do domyślnych" (Reset to defaults) button in the extension options.</p>
+
+  <h2>Changes</h2>
+  <p>Changes to this policy are indicated by the date at the top of the page.</p>
+</article>
+
+</main>
+</body>
+</html>

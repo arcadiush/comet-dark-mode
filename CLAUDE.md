@@ -33,6 +33,8 @@ Comet/
 ├── background/
 │   └── background.js          # Service worker — skróty, alarmy, sync (366 linii)
 ├── docs/ARCHITECTURE.md       # Architektura, przepływ danych, decyzje
+├── store/                     # Do sklepów: listing.md (teksty), privacy-policy.html, images/
+├── package.sh                 # Pakuje wtyczkę do dist/comet-dark-mode-<wersja>.zip
 ├── blog/                      # Wpis blogowy o wtyczce + zrzuty ekranu
 └── utils/
     ├── storage.js             # Warstwa dostępu do chrome.storage (228 linii)
