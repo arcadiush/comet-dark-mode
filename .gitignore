@@ -24,3 +24,6 @@ node_modules/
 tmp/
 temp/
 
+
+# Claude Code (lokalny harness testowy)
+.claude/launch.json

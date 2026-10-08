@@ -23,8 +23,8 @@
 
 ### Do zrobienia
 - Daty w `CHANGELOG.md`, decyzja o trybie "Analiza"
-- Test w prawdziwej wtyczce (przeładować na `chrome://extensions/`): Analiza +
-  suwak nasycenia na żywo, nasycenie 0% — harness nie sprawdza ścieżki popup → content
+- ~~Test w prawdziwej wtyczce~~ — potwierdzone przez użytkownika 2026-10-08:
+  Analiza + suwak nasycenia na żywo do 0% działa
 
 ## 2026-08-05
 
