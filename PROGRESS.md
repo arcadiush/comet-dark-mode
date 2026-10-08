@@ -87,9 +87,9 @@
   Publikacja do 24 h. Dodany plik `LICENSE` (MIT)
 - AMO: użytkownik wgrał 1.2.3 jako aktualizację (1 ostrzeżenie — `service_worker`, celowe).
   Claude dodał 3 zrzuty ze `store/images/` z podpisami PL na stronie dodatku (sekcja Obrazy)
+  oraz ikonę `icons/icon-128.png` (zamiast domyślnego puzzla). Status AMO: oczekuje na sprawdzenie
 
 ### Do zrobienia
-- AMO: ikona dodatku na stronie to wciąż domyślny puzzel — wgrać `icons/icon-128.png`
 - Chrome Web Store: konto (5 USD) i zgłoszenie — teksty w `store/listing.md`
 - Podmienić wpis na blogu użytkownika (opis jednego silnika + nowy `opcje.png`)
 - README/CLAUDE obiecują „zachowuje oryginalne kolory obrazów” — w praktyce lekko się
