@@ -4,6 +4,7 @@
 
 let config = null;
 let currentDomain = '';
+let editedCSSDomain = null; // Domena, do której edytor własnego CSS zapisuje zmiany
 
 // Inicjalizacja
 document.addEventListener('DOMContentLoaded', async () => {
@@ -177,6 +178,7 @@ function setupListeners() {
   // Per-domena
   document.getElementById('addPerDomain').addEventListener('click', showPerDomainDialog);
   document.getElementById('addCustomCSS').addEventListener('click', showCustomCSSDialog);
+  document.getElementById('customCSS').addEventListener('input', saveEditedCSS);
 
   // Presety
   document.getElementById('savePreset').addEventListener('click', savePresetFromCurrent);
@@ -560,14 +562,21 @@ function showCustomCSSDialog() {
   const existing = config.customCSS && config.customCSS[domain];
   document.getElementById('customCSS').value = existing || '';
 
-  // Zapisz przy zmianie
-  document.getElementById('customCSS').addEventListener('input', function() {
-    if (!config.customCSS) {
-      config.customCSS = {};
-    }
-    config.customCSS[domain] = this.value;
-    Storage.saveConfig({ customCSS: config.customCSS });
-  }, { once: false });
+  // Jeden listener (w setupListeners) zapisuje do aktualnie edytowanej domeny.
+  // Wcześniej każde otwarcie dodawało nowy listener i tekst trafiał do kilku domen
+  editedCSSDomain = domain;
+}
+
+/**
+ * Zapisuje zawartość edytora CSS dla aktualnie edytowanej domeny
+ */
+function saveEditedCSS() {
+  if (!editedCSSDomain) return;
+  if (!config.customCSS) {
+    config.customCSS = {};
+  }
+  config.customCSS[editedCSSDomain] = this.value;
+  Storage.saveConfig({ customCSS: config.customCSS });
 }
 
 /**
@@ -588,6 +597,9 @@ window.removeCustomCSS = function(domain) {
     Storage.saveConfig({ customCSS: config.customCSS });
     renderCustomCSSList();
     document.getElementById('customCSS').value = '';
+    if (editedCSSDomain === domain) {
+      editedCSSDomain = null;
+    }
   }
 };
 
