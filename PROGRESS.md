@@ -85,10 +85,11 @@
   na prośbę użytkownika): opis PL, kategoria „Modyfikacje interfejsu”, wsparcie = GitHub Issues,
   licencja MIT, bez polityki prywatności (brak zbierania danych), „bez narzędzi budujących”.
   Publikacja do 24 h. Dodany plik `LICENSE` (MIT)
+- AMO: użytkownik wgrał 1.2.3 jako aktualizację (1 ostrzeżenie — `service_worker`, celowe).
+  Claude dodał 3 zrzuty ze `store/images/` z podpisami PL na stronie dodatku (sekcja Obrazy)
 
 ### Do zrobienia
-- AMO: po publikacji 1.2.2 wgrać `dist/comet-dark-mode-1.2.3.zip` jako aktualizację
-  i dodać zrzuty ze `store/images/` na stronie dodatku
+- AMO: ikona dodatku na stronie to wciąż domyślny puzzel — wgrać `icons/icon-128.png`
 - Chrome Web Store: konto (5 USD) i zgłoszenie — teksty w `store/listing.md`
 - Podmienić wpis na blogu użytkownika (opis jednego silnika + nowy `opcje.png`)
 - README/CLAUDE obiecują „zachowuje oryginalne kolory obrazów” — w praktyce lekko się
