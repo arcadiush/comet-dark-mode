@@ -183,6 +183,9 @@ function setupListeners() {
 
   // Eksport/Import
   document.getElementById('exportBtn').addEventListener('click', exportSettings);
+  document.getElementById('importBtn').addEventListener('click', () => {
+    document.getElementById('importFile').click();
+  });
   document.getElementById('importFile').addEventListener('change', importSettings);
 
   // Zapisz
@@ -423,22 +426,49 @@ function renderPerDomainList() {
 
   Object.keys(config.perDomainSettings).forEach(domain => {
     const settings = config.perDomainSettings[domain];
-    const item = document.createElement('div');
-    item.className = 'per-domain-item';
-    item.innerHTML = `
-      <div>
-        <div class="domain-name">${domain}</div>
-        <div style="font-size: 12px; color: #666; margin-top: 4px;">
-          Jasność: ${settings.brightness || 0}, Kontrast: ${settings.contrast || 100}, Sepia: ${settings.sepia || 0}
-        </div>
-      </div>
-      <div class="domain-actions">
-        <button class="btn btn-secondary btn-small" onclick="editPerDomain('${domain}')">Edytuj</button>
-        <button class="btn btn-danger btn-small" onclick="removePerDomain('${domain}')">Usuń</button>
-      </div>
-    `;
-    listEl.appendChild(item);
+    listEl.appendChild(createListItem(
+      domain,
+      `Jasność: ${settings.brightness || 0}, Kontrast: ${settings.contrast || 100}, Sepia: ${settings.sepia || 0}`,
+      [
+        { label: 'Edytuj', className: 'btn-secondary', onClick: () => editPerDomain(domain) },
+        { label: 'Usuń', className: 'btn-danger', onClick: () => removePerDomain(domain) }
+      ]
+    ));
   });
+}
+
+/**
+ * Tworzy element listy (domena / preset) z przyciskami akcji.
+ * Teksty wstawiane przez textContent, a przyciski podpinane przez addEventListener,
+ * bo CSP Manifest V3 blokuje inline `onclick` na stronach wtyczki.
+ * @param {string} title - Nazwa (domena lub preset)
+ * @param {string} details - Opis pod nazwą
+ * @param {Array<{label: string, className: string, onClick: Function}>} actions
+ * @returns {HTMLElement}
+ */
+function createListItem(title, details, actions) {
+  const item = document.createElement('div');
+  item.className = 'per-domain-item';
+  item.innerHTML = `
+    <div>
+      <div class="domain-name"></div>
+      <div class="domain-details" style="font-size: 12px; color: #666; margin-top: 4px;"></div>
+    </div>
+    <div class="domain-actions"></div>
+  `;
+  item.querySelector('.domain-name').textContent = title;
+  item.querySelector('.domain-details').textContent = details;
+
+  const actionsEl = item.querySelector('.domain-actions');
+  actions.forEach(({ label, className, onClick }) => {
+    const button = document.createElement('button');
+    button.className = `btn ${className} btn-small`;
+    button.textContent = label;
+    button.addEventListener('click', onClick);
+    actionsEl.appendChild(button);
+  });
+
+  return item;
 }
 
 /**
@@ -454,21 +484,14 @@ function renderCustomCSSList() {
   }
 
   Object.keys(config.customCSS).forEach(domain => {
-    const item = document.createElement('div');
-    item.className = 'per-domain-item';
-    item.innerHTML = `
-      <div>
-        <div class="domain-name">${domain}</div>
-        <div style="font-size: 12px; color: #666; margin-top: 4px;">
-          ${config.customCSS[domain].substring(0, 50)}...
-        </div>
-      </div>
-      <div class="domain-actions">
-        <button class="btn btn-secondary btn-small" onclick="editCustomCSS('${domain}')">Edytuj</button>
-        <button class="btn btn-danger btn-small" onclick="removeCustomCSS('${domain}')">Usuń</button>
-      </div>
-    `;
-    listEl.appendChild(item);
+    listEl.appendChild(createListItem(
+      domain,
+      `${config.customCSS[domain].substring(0, 50)}...`,
+      [
+        { label: 'Edytuj', className: 'btn-secondary', onClick: () => editCustomCSS(domain) },
+        { label: 'Usuń', className: 'btn-danger', onClick: () => removeCustomCSS(domain) }
+      ]
+    ));
   });
 }
 
@@ -589,22 +612,15 @@ function renderPresetsList() {
     }
 
     Object.keys(presets).forEach(name => {
-      const item = document.createElement('div');
-      item.className = 'per-domain-item';
-      item.innerHTML = `
-        <div>
-          <div class="domain-name">${name}</div>
-          <div style="font-size: 12px; color: #666; margin-top: 4px;">
-            Jasność: ${presets[name].brightness || 0}, Kontrast: ${presets[name].contrast || 100}, 
-            Sepia: ${presets[name].sepia || 0}, Nasycenie: ${presets[name].saturation || 100}
-          </div>
-        </div>
-        <div class="domain-actions">
-          <button class="btn btn-secondary btn-small" onclick="applyPresetFromOptions('${name}')">Zastosuj</button>
-          <button class="btn btn-danger btn-small" onclick="deletePreset('${name}')">Usuń</button>
-        </div>
-      `;
-      listEl.appendChild(item);
+      listEl.appendChild(createListItem(
+        name,
+        `Jasność: ${presets[name].brightness || 0}, Kontrast: ${presets[name].contrast || 100}, ` +
+          `Sepia: ${presets[name].sepia || 0}, Nasycenie: ${presets[name].saturation || 100}`,
+        [
+          { label: 'Zastosuj', className: 'btn-secondary', onClick: () => applyPresetFromOptions(name) },
+          { label: 'Usuń', className: 'btn-danger', onClick: () => deletePreset(name) }
+        ]
+      ));
     });
   }).catch(error => {
     console.error('Błąd renderowania presetów:', error);
