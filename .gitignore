@@ -30,3 +30,7 @@ temp/
 
 # Paczki do sklepów (package.sh)
 dist/
+
+# Notatki robocze z sesji Claude (tylko lokalnie)
+CLAUDE.md
+PROGRESS.md
