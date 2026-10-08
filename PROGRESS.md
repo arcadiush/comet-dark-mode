@@ -93,6 +93,9 @@ i zgłoszenia do addons.mozilla.org oraz Chrome Web Store.
   rozszerzeniom, także Claude in Chrome, dostęp do stron Web Store). Ostrzeżenie „Publikowanie
   będzie opóźnione” (szerokie uprawnienia hostów) zaakceptowane: `activeTab` zepsułby
   automatyczne przyciemnianie. Dodana ikona sklepu z marginesem `store/images/store-icon-128.png`
+- README: zrzut przed/po (`store/images/screenshot-1-przed-po.png`) pod numerem wersji
+- Blog autora: zaktualizowany wpis o wtyczce (jeden silnik, nowy zrzut opcji, link do GitHuba,
+  ostrożniej o zdjęciach i białym błysku) oraz karta projektu (bez „zdjęcia bez zmian”)
 
 ### Przerwane / W trakcie
 - Publikacja w sklepach — czeka na recenzje, nic do zrobienia po naszej stronie:
@@ -101,8 +104,7 @@ i zgłoszenia do addons.mozilla.org oraz Chrome Web Store.
 
 ### Na następną sesję
 - Sprawdzić e-maile od Mozilli i Google; przy odrzuceniu — poprawki wg uwag recenzenta
-- Podmienić wpis na blogu użytkownika (opis jednego silnika + nowy `opcje.png`)
-- README/CLAUDE obiecują „zachowuje oryginalne kolory obrazów” — w praktyce lekko się
+- README/CLAUDE (repo wtyczki) obiecują „zachowuje oryginalne kolory obrazów” — w praktyce lekko się
   zmieniają (ograniczenie `hue-rotate`); złagodzić opis albo poprawić silnik
 - Martwy kod: MutationObserver w `content.js` (pusty callback), `utils/automation.js`
   (nigdzie nieładowany)

@@ -67,13 +67,13 @@ Kolejność ładowania content scripts (z `manifest.json`):
   edytor CSS; mniej uprawnień; ciche logi; jeden manifest dla Chrome i Firefoksa 140+
 - 2026-10-08: repo publiczne (https://github.com/arcadiush/comet-dark-mode, MIT, `PRIVACY.md`),
   pakiet do sklepów (`package.sh`, `store/`), zgłoszenia do AMO i Chrome Web Store
+- 2026-10-08: wpis o wtyczce i karta projektu na blogu autora zaktualizowane
 
 ### [-] W trakcie
 - Recenzje w sklepach (wersja 1.2.3): addons.mozilla.org (do 24 h) i Chrome Web Store
   (do ~2 tygodni) — czekamy na e-maile; kolejne wersje: `./package.sh` → wgrać zip jako aktualizację
 
 ### [ ] Planowane / do zrobienia
-- Podmienić wpis na blogu użytkownika (jeden silnik + nowy `blog/images/opcje.png`)
 - Złagodzić w README/CLAUDE „zachowuje oryginalne kolory obrazów” (patrz Znane problemy)
 - Usunąć martwy kod: pusty MutationObserver w `content/content.js`, nieładowany `utils/automation.js`
 - Uzupełnić daty wydań w `CHANGELOG.md` (obecnie `2024-12-XX`, `2024-XX-XX`)
