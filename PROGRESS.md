@@ -24,13 +24,12 @@
   usunięte metody analizy, cache, `getElementSelector()`, `clearCache()`,
   `handleDynamicContent()` (339 → 222 linie). Usunięty wybór silnika w `options.html/.js`
   i martwy blok `analyze` w `content.js`. `renderEngine` zostaje w storage
-  i imporcie/eksporcie tylko dla zgodności. Retest harness: filtr, zmiana na żywo,
+  i imporcie/eksporcie tylko dla zgodności. Usunięty też nieużywany `.select-input` z `options.css`. Retest harness: filtr, zmiana na żywo,
   ponowne init, zera, wyłączenie — OK. Docs: README, ARCHITECTURE, CLAUDE, CHANGELOG, blog
 
 ### Do zrobienia
 - Daty w `CHANGELOG.md` (pominięte na razie — brak dat wydań w git)
 - Zrzut `blog/images/opcje.png` nadal pokazuje wybór silnika — do odświeżenia
-- `.select-input` w `options/options.css` prawdopodobnie już nieużywane
 - MutationObserver w `content.js` (~l. 785–800) ma pusty callback — nic nie robi
 - ~~Test w prawdziwej wtyczce~~ — potwierdzone przez użytkownika 2026-10-08:
   Analiza + suwak nasycenia na żywo do 0% działa

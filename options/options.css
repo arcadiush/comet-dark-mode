@@ -134,8 +134,7 @@ body {
 .text-input,
 .number-input,
 .time-input,
-.textarea-input,
-.select-input {
+.textarea-input {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #ddd;
@@ -148,8 +147,7 @@ body {
 .text-input:focus,
 .number-input:focus,
 .time-input:focus,
-.textarea-input:focus,
-.select-input:focus {
+.textarea-input:focus {
   outline: none;
   border-color: #2196F3;
 }
