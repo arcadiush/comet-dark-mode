@@ -26,7 +26,7 @@ Przed instalacją upewnij się, że masz:
 ### Krok 3: Załaduj wtyczkę
 
 1. Kliknij przycisk **"Załaduj rozpakowane"** (Load unpacked) w lewym górnym rogu
-2. W oknie wyboru folderu przejdź do folderu z wtyczką: `/Users/ar0/Moje/AI/Wtyczki/Comet`
+2. W oknie wyboru folderu przejdź do folderu z wtyczką (tego, w którym jest `manifest.json`)
 3. Wybierz folder i kliknij **"Otwórz"** (Open)
 
 ### Krok 4: Sprawdź instalację
