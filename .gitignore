@@ -27,3 +27,6 @@ temp/
 
 # Claude Code (lokalny harness testowy)
 .claude/launch.json
+
+# Paczki do sklepów (package.sh)
+dist/
