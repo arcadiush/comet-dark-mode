@@ -7,6 +7,13 @@ a projekt przestrzega [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Nieopublikowane]
 
+## [1.2.3] - 2026-10-08
+
+### Zmieniono
+- Minimalna wersja Firefoksa podniesiona do 140 (Android: 142) — od tych wersji
+  działają `data_collection_permissions` i `options_page`. Usuwa 4 ostrzeżenia
+  walidatora addons.mozilla.org
+
 ## [1.2.2] - 2026-10-08
 
 ### Dodano
