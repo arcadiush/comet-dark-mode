@@ -73,8 +73,15 @@
 - (stara notatka) NIE zweryfikowane w prawdziwej wtyczce: brak błysku (harness nie mierzy pierwszego
   malowania) — do sprawdzenia przez użytkownika
 
+- **Repo upublicznione** (https://github.com/arcadiush/comet-dark-mode). Przed tym audyt
+  całej historii: brak sekretów/IP/nazw serwerów; usunięta lokalna ścieżka z `INSTALACJA.md`;
+  e-mail autora w 25 commitach zamieniony na `62109157+arcadiush@users.noreply.github.com`
+  (`git filter-repo --mailmap`, force push `main` + tagi; drzewa i opisy commitów bez zmian;
+  kopia zapasowa przed przepisaniem: bundle w scratchpadzie sesji). Lokalny `user.email`
+  repo ustawiony na noreply. `PRIVACY.md` (PL/EN, kontakt przez GitHub Issues) —
+  link do sklepów: https://github.com/arcadiush/comet-dark-mode/blob/main/PRIVACY.md
+
 ### Do zrobienia
-- Opublikować `store/privacy-policy.html` (blog / własny serwer) i wpisać e-mail kontaktowy
 - Założyć konta (CWS: 5 USD, AMO: darmowe) i wgrać `dist/comet-dark-mode-1.2.2.zip` — robi użytkownik
 - Podmienić wpis na blogu użytkownika (opis jednego silnika + nowy `opcje.png`)
 - README/CLAUDE obiecują „zachowuje oryginalne kolory obrazów” — w praktyce lekko się
