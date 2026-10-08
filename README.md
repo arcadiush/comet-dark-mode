@@ -100,5 +100,5 @@ Wtyczka została zoptymalizowana pod kątem:
 
 ## Licencja
 
-Projekt otwarty do użytku osobistego i komercyjnego.
+[MIT](LICENSE) — możesz używać, zmieniać i rozpowszechniać kod, także komercyjnie, z zachowaniem informacji o autorze.
 

@@ -12,7 +12,7 @@ Wersja PL jako główna, EN jako drugi język (oba sklepy pozwalają dodać tłu
 | Nazwa | Comet Dark Mode |
 | Kategoria CWS | Ułatwienia dostępu (Accessibility) |
 | Kategoria AMO | Wygląd (Appearance) |
-| Licencja AMO | do wyboru przez autora (brak pliku LICENSE w repo) |
+| Licencja | MIT (plik `LICENSE`) |
 | Strona domowa | https://github.com/arcadiush/comet-dark-mode |
 | Polityka prywatności | https://github.com/arcadiush/comet-dark-mode/blob/main/PRIVACY.md (ta sama treść co `store/privacy-policy.html` — do hostowania gdzie indziej; zmieniać oba pliki razem) |
 | Grafiki | `store/images/` (zrzuty 1280×800, kafelek 440×280) |
