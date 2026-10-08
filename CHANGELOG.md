@@ -7,6 +7,8 @@ a projekt przestrzega [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Nieopublikowane]
 
+## [1.2.0] - 2026-10-08
+
 ### Naprawiono (2026-10-08)
 - **Po przełączeniu wtyczki ikona zmieniała się na starą, prawie niewidoczną** (białe
   słońce) — popup podmieniał ją na `icon-light/dark-*`. Ikonę ustawia teraz

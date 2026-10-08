@@ -46,6 +46,10 @@
   → działa też dla skrótu i automatyzacji). Nowe `icon-off-*` (szare słońce,
   `sun-off-source.svg`). Fix gradientu SVG (`userSpaceOnUse`) — promienie poziome/pionowe
   nie miały koloru. Podgląd na jasnym i ciemnym pasku OK
+- Nowy zrzut `blog/images/opcje.png` (headless Chrome, 800 px, atrapa chrome.* z pustym
+  storage) — bez wyboru silnika, z listą wbudowanych presetów
+- **Wersja 1.2.0** (manifest, README, CLAUDE, CHANGELOG). Zasada od teraz: każda zmiana
+  = podbicie wersji (poprawka → patch)
 - Edytor CSS: jeden listener + `editedCSSDomain` zamiast listenera przy każdym otwarciu.
   Test: 3 domeny edytowane po kolei, każda zapisuje tylko swój tekst
 - (stara notatka) NIE zweryfikowane w prawdziwej wtyczce: brak błysku (harness nie mierzy pierwszego
@@ -54,7 +58,6 @@
 ### Do zrobienia
 - Test w prawdziwej wtyczce: ikona włącz/wyłącz (popup i `Cmd+Shift+D`), strona
   natywnie ciemna (np. GitHub w trybie ciemnym) → powiadomienie
-- Zrzut `blog/images/opcje.png` pokazuje usunięty wybór silnika — do odświeżenia
 - Wariant Firefox: `CLAUDE.md` wspomina V2, w repo brak manifestu — dodać lub poprawić docs
 - Daty w `CHANGELOG.md` (pominięte na razie — brak dat wydań w git)
 - Zrzut `blog/images/opcje.png` nadal pokazuje wybór silnika — do odświeżenia

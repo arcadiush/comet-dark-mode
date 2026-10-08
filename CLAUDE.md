@@ -6,7 +6,7 @@ Lekka wtyczka do przeglądarek (Chrome, Edge, Firefox) do globalnego przełącza
 trybu ciemnego z inteligentną inwersją kolorów. Zachowuje oryginalne kolory
 obrazów, wideo i iframe. Bez zewnętrznych zależności.
 
-**Wersja:** 1.1.0 · Manifest V3
+**Wersja:** 1.2.0 · Manifest V3
 
 ## Stack techniczny
 
@@ -46,7 +46,7 @@ Kolejność ładowania content scripts (z `manifest.json`):
 
 ## Aktualny stan
 
-### [x] Ukończone (v1.1.0)
+### [x] Ukończone (v1.2.0)
 - Globalny przełącznik trybu ciemnego (popup + skrót `Ctrl/Cmd+Shift+D`)
 - Silnik **Filtr** (`filter: invert()` na `html`, media odwracane z powrotem); tryb "Analiza" usunięty 2026-10-08
 - Regulacje: jasność, kontrast, sepia, nasycenie, obrót odcienia, szarość
@@ -77,6 +77,8 @@ Kolejność ładowania content scripts (z `manifest.json`):
 - Logi w content scripts przez `debugLog()` / `DarkModeEngine.log()` (wyłączone flagą `DEBUG` / `debug`)
 - Trwałość ustawień przez warstwę `utils/storage.js` (nie odwoływać się do `chrome.storage` bezpośrednio z UI)
 - `commit messages` po polsku, zwięzłe
+- Każda zmiana wtyczki = podbicie wersji (`manifest.json`, `README.md`, `CLAUDE.md`)
+  + sekcja w `CHANGELOG.md`; poprawki → patch (1.2.x), funkcje/usunięcia → minor
 
 ## Znane problemy i bugi
 
