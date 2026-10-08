@@ -16,12 +16,12 @@ const DarkModeEngine = {
   init(engineType, config = {}) {
     this.currentEngine = engineType;
     this.config = {
-      brightness: config.brightness || 0,
-      contrast: config.contrast || 100,
-      sepia: config.sepia || 0,
-      saturation: config.saturation || 100,
-      hueRotate: config.hueRotate || 0,
-      grayscale: config.grayscale || 0
+      brightness: config.brightness ?? 0,
+      contrast: config.contrast ?? 100,
+      sepia: config.sepia ?? 0,
+      saturation: config.saturation ?? 100,
+      hueRotate: config.hueRotate ?? 0,
+      grayscale: config.grayscale ?? 0
     };
 
     if (engineType === 'filter') {
@@ -86,12 +86,12 @@ const DarkModeEngine = {
    * @returns {string} Wartość dla CSS `filter`
    */
   buildFilterValue() {
-    const brightness = 100 - (this.config.brightness || 0);
-    const contrast = this.config.contrast || 100;
-    const sepia = this.config.sepia || 0;
-    const saturation = this.config.saturation || 100;
-    const hueRotate = this.config.hueRotate || 0;
-    const grayscale = this.config.grayscale || 0;
+    const brightness = 100 - (this.config.brightness ?? 0);
+    const contrast = this.config.contrast ?? 100;
+    const sepia = this.config.sepia ?? 0;
+    const saturation = this.config.saturation ?? 100;
+    const hueRotate = this.config.hueRotate ?? 0;
+    const grayscale = this.config.grayscale ?? 0;
 
     // Kolejność filtrów jest ważna - niektóre filtry muszą być przed invert
     let filterValue = '';
@@ -169,7 +169,8 @@ const DarkModeEngine = {
    */
   enableAnalyzeMode() {
     // Użyj cache jeśli dostępny
-    const cacheKey = window.location.href;
+    // Klucz zawiera filtr, by zmiana suwaków nie zwracała starego CSS z cache
+    const cacheKey = `${window.location.href}|${this.buildFilterValue()}`;
     if (this.cache.has(cacheKey)) {
       const cachedCSS = this.cache.get(cacheKey);
       this.injectStyle(cachedCSS);

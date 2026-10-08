@@ -8,6 +8,12 @@ a projekt przestrzega [Semantic Versioning](https://semver.org/lang/pl/).
 ## [Nieopublikowane]
 
 ### Naprawiono
+- **Tryb "Analiza" ignorował zmiany suwaków** po pierwszym włączeniu na stronie —
+  cache CSS był kluczowany samym URL, więc przy kolejnym `enable()` / `updateConfig()`
+  zwracał stary filtr. Klucz cache zawiera teraz wartość filtra
+- **Suwaków nie dało się ustawić na 0** (np. nasycenie 0% = strona czarno-biała,
+  kontrast 0%) — `||` zamieniało 0 na wartość domyślną. Zamienione na `??`
+  w `dark-mode-engine.js` i w ścieżce suwaków na żywo w `content.js`
 - **Krytyczne: tryb ciemny nie włączał się na wielu stronach** (m.in. x-kom.pl).
   `detectNativeDarkMode()` błędnie uznawał przezroczyste tło (`rgba(0,0,0,0)`) za
   czarne — parser koloru ignorował kanał alpha — więc wtyczka "wykrywała" nieistniejący

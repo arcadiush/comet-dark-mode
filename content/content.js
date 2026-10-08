@@ -723,21 +723,21 @@
           // Zaktualizuj silnik z nową konfiguracją
           if (typeof DarkModeEngine !== 'undefined') {
             console.log('[Comet Dark Mode] Aktualizuję DarkModeEngine z nową konfiguracją:', {
-              brightness: config.brightness || 0,
-              contrast: config.contrast || 100,
-              sepia: config.sepia || 0,
-              saturation: config.saturation || 100,
-              hueRotate: config.hueRotate || 0,
-              grayscale: config.grayscale || 0
+              brightness: config.brightness ?? 0,
+              contrast: config.contrast ?? 100,
+              sepia: config.sepia ?? 0,
+              saturation: config.saturation ?? 100,
+              hueRotate: config.hueRotate ?? 0,
+              grayscale: config.grayscale ?? 0
             });
             // updateConfig() automatycznie wywołuje enable() jeśli tryb jest włączony
             DarkModeEngine.updateConfig({
-              brightness: config.brightness || 0,
-              contrast: config.contrast || 100,
-              sepia: config.sepia || 0,
-              saturation: config.saturation || 100,
-              hueRotate: config.hueRotate || 0,
-              grayscale: config.grayscale || 0
+              brightness: config.brightness ?? 0,
+              contrast: config.contrast ?? 100,
+              sepia: config.sepia ?? 0,
+              saturation: config.saturation ?? 100,
+              hueRotate: config.hueRotate ?? 0,
+              grayscale: config.grayscale ?? 0
             });
             console.log('[Comet Dark Mode] Style zaktualizowane');
           } else {

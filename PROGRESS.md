@@ -11,9 +11,20 @@
 - Uzupełnienie brakującej historii: 2026-08-05 dodano też autora w `manifest.json`
   (commit `e758569`) i stopkę z autorem w popupie (`popup.html`/`popup.css`, `62acf10`)
 
+- Test obu silników w przeglądarce (harness: strona testowa + prawdziwy
+  `dark-mode-engine.js`, odczyt computed `filter` + zrzuty). Filtr OK. Znalezione
+  i naprawione 2 bugi:
+  - Analiza ignorowała suwaki po 1. włączeniu na stronie (cache per sam URL) →
+    klucz cache = URL + wartość filtra
+  - Suwaki nie dawały się ustawić na 0 (`||` → `??` w silniku i `content.js`)
+  - Retest: 10/10 scenariuszy OK (oba tryby, zmiana na żywo, ponowne init, zera,
+    obrazki zachowują kolory)
+- Harness odpalany przez `.claude/launch.json` (`engine-harness`, port 8765; gitignored)
+
 ### Do zrobienia
-- Bez zmian względem wpisu z 2026-08-05 (daty w `CHANGELOG.md`, test silników
-  w przeglądarce, decyzja o trybie "Analiza")
+- Daty w `CHANGELOG.md`, decyzja o trybie "Analiza"
+- Test w prawdziwej wtyczce (przeładować na `chrome://extensions/`): Analiza +
+  suwak nasycenia na żywo, nasycenie 0% — harness nie sprawdza ścieżki popup → content
 
 ## 2026-08-05
 
