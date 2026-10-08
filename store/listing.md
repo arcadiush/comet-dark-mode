@@ -24,11 +24,11 @@ Wersja PL jako główna, EN jako drugi język (oba sklepy pozwalają dodać tłu
 
 CWS: maks. 132 znaki · AMO: maks. 250 znaków
 
-**PL (118 znaków):**
-Tryb ciemny na każdej stronie. Odwraca kolory, ale zostawia zdjęcia i wideo bez zmian. Bez kont, bez zbierania danych.
+**PL (129 znaków):**
+Tryb ciemny na każdej stronie. Odwraca kolory stron, a zdjęcia i wideo nie zamieniają się w negatyw. Bez kont i zbierania danych.
 
-**EN (116 znaków):**
-Dark mode for every website. Inverts colors while keeping photos and videos intact. No accounts, no data collection.
+**EN (131 znaków):**
+Dark mode for every website. Inverts page colors without turning photos and videos into negatives. No accounts, no data collection.
 
 ---
 
@@ -36,7 +36,7 @@ Dark mode for every website. Inverts colors while keeping photos and videos inta
 
 Nie każda strona ma tryb ciemny. Comet Dark Mode wymusza go wszędzie — jednym kliknięciem albo skrótem klawiszowym.
 
-Wtyczka odwraca kolory tekstu i tła, a zdjęcia, filmy i osadzone ramki zostawia w oryginalnych kolorach, bez efektu negatywu. Filtr działa od pierwszej chwili ładowania strony, więc nie ma białego błysku.
+Wtyczka odwraca kolory tekstu i tła, a zdjęcia, filmy i osadzone ramki odwraca z powrotem, więc nie wyglądają jak negatyw. Filtr działa od pierwszej chwili ładowania strony, więc nie ma białego błysku.
 
 NAJWAŻNIEJSZE FUNKCJE
 
@@ -61,7 +61,7 @@ Dostęp do wszystkich stron jest potrzebny wyłącznie po to, by nałożyć na n
 
 Not every website has a dark mode. Comet Dark Mode adds one everywhere — with a single click or a keyboard shortcut.
 
-The extension inverts text and background colors while keeping photos, videos and embedded frames in their original colors, with no negative effect. The filter is applied from the very first moment a page loads, so there is no white flash.
+The extension inverts text and background colors and flips photos, videos and embedded frames back, so they don't look like negatives. The filter is applied from the very first moment a page loads, so there is no white flash.
 
 KEY FEATURES
 
