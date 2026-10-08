@@ -48,6 +48,12 @@
   nie miały koloru. Podgląd na jasnym i ciemnym pasku OK
 - Nowy zrzut `blog/images/opcje.png` (headless Chrome, 800 px, atrapa chrome.* z pustym
   storage) — bez wyboru silnika, z listą wbudowanych presetów
+- **Wersja 1.2.1 — Firefox**: użytkownik nie mógł dodać wtyczki. Przyczyna: tylko
+  `background.service_worker` (Firefox go nie obsługuje). Dodane `background.scripts`
+  + `browser_specific_settings.gecko` (id `comet-dark-mode@sobacki`, min. 121).
+  Jeden manifest dla obu przeglądarek. Docs: README, CLAUDE, INSTALACJA (uprawnienia
+  do stron w Firefoksie). NIE zweryfikowane — czeka na test użytkownika w FF i Chrome
+- Wypchnięto na GitHub `main` + tag `v1.2.0` (na prośbę użytkownika)
 - **Wersja 1.2.0** (manifest, README, CLAUDE, CHANGELOG). Zasada od teraz: każda zmiana
   = podbicie wersji (poprawka → patch)
 - Edytor CSS: jeden listener + `editedCSSDomain` zamiast listenera przy każdym otwarciu.
@@ -58,7 +64,7 @@
 ### Do zrobienia
 - Test w prawdziwej wtyczce: ikona włącz/wyłącz (popup i `Cmd+Shift+D`), strona
   natywnie ciemna (np. GitHub w trybie ciemnym) → powiadomienie
-- Wariant Firefox: `CLAUDE.md` wspomina V2, w repo brak manifestu — dodać lub poprawić docs
+- Test 1.2.1: ładowanie w Firefoksie (`about:debugging`) i w Chrome (czy nadal bez błędów)
 - Daty w `CHANGELOG.md` (pominięte na razie — brak dat wydań w git)
 - Zrzut `blog/images/opcje.png` nadal pokazuje wybór silnika — do odświeżenia
 - MutationObserver w `content.js` (~l. 785–800) ma pusty callback — nic nie robi

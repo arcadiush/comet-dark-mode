@@ -68,6 +68,10 @@ Przed instalacją upewnij się, że masz:
 
 1. Wtyczka powinna pojawić się na liście
 2. Jeśli widzisz błędy, sprawdź konsolę przeglądarki (F12)
+3. Wymagany Firefox 121 lub nowszy
+4. Jeśli tryb ciemny nie działa na stronach: `about:addons` → Comet Dark Mode →
+   zakładka **Uprawnienia** → włącz dostęp do wszystkich stron (w Manifest V3
+   Firefox może nie przyznać go automatycznie)
 
 **UWAGA:** W Firefox wtyczka jest ładowana tymczasowo i zniknie po zamknięciu przeglądarki. Aby zainstalować na stałe, musisz spakować wtyczkę jako plik `.xpi`.
 

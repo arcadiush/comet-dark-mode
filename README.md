@@ -2,7 +2,7 @@
 
 Lekka i wydajna wtyczka do przeglądarek (Chrome, Firefox, Edge) umożliwiająca globalne przełączanie trybu ciemnego z inteligentną inwersją kolorów.
 
-**Aktualna wersja:** 1.2.0 | [Historia zmian (CHANGELOG)](CHANGELOG.md)
+**Aktualna wersja:** 1.2.1 | [Historia zmian (CHANGELOG)](CHANGELOG.md)
 
 ## Funkcjonalności
 
@@ -86,7 +86,7 @@ Comet/
 
 ## Wymagania Techniczne
 
-- Manifest V3 (Chrome/Edge) lub V2 (Firefox)
+- Manifest V3 — jeden `manifest.json` dla Chrome/Edge i Firefoksa (121+)
 - HTML5, CSS3, JavaScript (ES6+)
 - Bez zewnętrznych zależności (lekka implementacja)
 

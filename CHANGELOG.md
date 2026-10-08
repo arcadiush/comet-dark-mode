@@ -7,6 +7,14 @@ a projekt przestrzega [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Nieopublikowane]
 
+## [1.2.1] - 2026-10-08
+
+### Naprawiono
+- **Wtyczka nie ładowała się w Firefoksie** — manifest miał tylko
+  `background.service_worker`, którego Firefox nie obsługuje. Dodane
+  `background.scripts` (Chrome 121+ je ignoruje) i `browser_specific_settings.gecko`
+  (id + minimalna wersja 121)
+
 ## [1.2.0] - 2026-10-08
 
 ### Naprawiono (2026-10-08)
