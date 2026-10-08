@@ -40,14 +40,21 @@
   3. Usunięte `scripting` i `web_accessible_resources`
   4. `console.log` w content scripts za flagą (`DEBUG` w `content.js`, `debug`
      w silniku). Test: 0 logów przy wyłączonej fladze
-- NIE zweryfikowane w prawdziwej wtyczce: brak błysku (harness nie mierzy pierwszego
+- Test w prawdziwej wtyczce (użytkownik): brak błysku i przyciski w opcjach — działa
+- Ikona na pasku: popup podmieniał ją na stare `icon-light/dark-*` (białe, niewidoczne).
+  Logika przeniesiona do `background.js` (`updateIcon()` na starcie + `storage.onChanged`
+  → działa też dla skrótu i automatyzacji). Nowe `icon-off-*` (szare słońce,
+  `sun-off-source.svg`). Fix gradientu SVG (`userSpaceOnUse`) — promienie poziome/pionowe
+  nie miały koloru. Podgląd na jasnym i ciemnym pasku OK
+- Edytor CSS: jeden listener + `editedCSSDomain` zamiast listenera przy każdym otwarciu.
+  Test: 3 domeny edytowane po kolei, każda zapisuje tylko swój tekst
+- (stara notatka) NIE zweryfikowane w prawdziwej wtyczce: brak błysku (harness nie mierzy pierwszego
   malowania) — do sprawdzenia przez użytkownika
 
 ### Do zrobienia
-- Test w prawdziwej wtyczce: brak białego błysku, przyciski w opcjach, strona
+- Test w prawdziwej wtyczce: ikona włącz/wyłącz (popup i `Cmd+Shift+D`), strona
   natywnie ciemna (np. GitHub w trybie ciemnym) → powiadomienie
-- Bug: `showCustomCSSDialog()` w `options.js` dodaje nowy listener `input` przy każdym
-  wywołaniu — po edycji CSS dla 2 domen pisanie zapisuje tekst do obu
+- Zrzut `blog/images/opcje.png` pokazuje usunięty wybór silnika — do odświeżenia
 - Wariant Firefox: `CLAUDE.md` wspomina V2, w repo brak manifestu — dodać lub poprawić docs
 - Daty w `CHANGELOG.md` (pominięte na razie — brak dat wydań w git)
 - Zrzut `blog/images/opcje.png` nadal pokazuje wybór silnika — do odświeżenia

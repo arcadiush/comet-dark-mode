@@ -297,7 +297,6 @@ function setupListeners() {
     await saveConfig('enabled', e.target.checked);
     config.enabled = e.target.checked;
     updateUI();
-    updateIcon(e.target.checked);
     
     // Powiadom wszystkie karty
     const tabs = await chrome.tabs.query({});
@@ -328,7 +327,6 @@ function setupListeners() {
     if (changes.enabled) {
       config.enabled = changes.enabled.newValue;
       updateUI();
-      updateIcon(changes.enabled.newValue);
     }
     if (changes.brightness || changes.contrast || changes.sepia || changes.saturation || changes.hueRotate || changes.grayscale) {
       if (changes.brightness) config.brightness = changes.brightness.newValue;
@@ -600,29 +598,6 @@ async function applyPreset(name) {
     });
   } catch (error) {
     console.error('Błąd zastosowania presetu:', error);
-  }
-}
-
-/**
- * Aktualizuje ikonę w pasku narzędzi
- */
-async function updateIcon(enabled) {
-  if (enabled) {
-    chrome.action.setIcon({
-      path: {
-        16: '../icons/icon-dark-16.png',
-        48: '../icons/icon-dark-48.png',
-        128: '../icons/icon-dark-128.png'
-      }
-    });
-  } else {
-    chrome.action.setIcon({
-      path: {
-        16: '../icons/icon-light-16.png',
-        48: '../icons/icon-light-48.png',
-        128: '../icons/icon-light-128.png'
-      }
-    });
   }
 }
 

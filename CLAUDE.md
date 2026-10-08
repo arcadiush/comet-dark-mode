@@ -22,8 +22,8 @@ obrazów, wideo i iframe. Bez zewnętrznych zależności.
 ```
 Comet/
 ├── manifest.json              # Manifest V3, uprawnienia, rejestracja skryptów
-├── icons/                     # Ikony słoneczka icon-16/32/48/128.png (źródło: sun-source.svg);
-│                              #   stare icon-light-*/icon-dark-* zachowane, nieużywane
+├── icons/                     # Słońce: icon-* (włączona), icon-off-* (wyłączona, szare);
+│                              #   źródła sun-source.svg / sun-off-source.svg; icon-light/dark-* nieużywane
 ├── popup/                     # Panel popup (popup.html/.css/.js — 628 linii JS)
 ├── options/                   # Strona opcji (options.html/.css/.js — 820 linii JS)
 ├── content/

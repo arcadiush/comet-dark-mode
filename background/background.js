@@ -22,6 +22,7 @@ init();
  */
 async function init() {
   await loadConfig();
+  updateIcon(config.enabled);
   setupAutomation();
   setupStorageListener();
 }
@@ -299,6 +300,22 @@ async function notifyAllTabs() {
 }
 
 /**
+ * Ustawia ikonę na pasku: kolorowe słońce = włączony, szare = wyłączony
+ * @param {boolean} enabled
+ */
+function updateIcon(enabled) {
+  const name = enabled ? 'icon' : 'icon-off';
+  chrome.action.setIcon({
+    path: {
+      16: `/icons/${name}-16.png`,
+      32: `/icons/${name}-32.png`,
+      48: `/icons/${name}-48.png`,
+      128: `/icons/${name}-128.png`
+    }
+  });
+}
+
+/**
  * Konfiguruje nasłuchiwanie zmian w storage
  */
 function setupStorageListener() {
@@ -310,6 +327,11 @@ function setupStorageListener() {
           config[key] = changes[key].newValue;
         }
       });
+
+      // Ikona śledzi stan niezależnie od źródła zmiany (popup, skrót, automatyzacja)
+      if (changes.enabled) {
+        updateIcon(changes.enabled.newValue);
+      }
 
       // Przeładuj automatyzację jeśli zmienił się typ
       if (changes.automation) {

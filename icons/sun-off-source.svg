@@ -1,13 +1,13 @@
 <svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="sun" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="128">
-      <stop offset="0" stop-color="#FFC94D"/>
-      <stop offset="1" stop-color="#F49200"/>
+      <stop offset="0" stop-color="#D9D9D9"/>
+      <stop offset="1" stop-color="#9E9E9E"/>
     </linearGradient>
   </defs>
 
   <!-- Warstwa 1: ciemny obrys (kontrast na jasnym pasku) -->
-  <g stroke="#3D2B00" stroke-width="11" stroke-linecap="round" fill="#3D2B00">
+  <g stroke="#2E2E2E" stroke-width="11" stroke-linecap="round" fill="#2E2E2E">
     <circle cx="64" cy="64" r="26"/>
     <g>
       <line x1="64" y1="9" x2="64" y2="29"/>
@@ -21,7 +21,7 @@
     </g>
   </g>
 
-  <!-- Warstwa 2: bursztynowe wypełnienie (kontrast na ciemnym pasku) -->
+  <!-- Warstwa 2: szare wypełnienie - stan wyłączony (kontrast na ciemnym pasku) -->
   <g stroke="url(#sun)" stroke-width="11" stroke-linecap="round" fill="url(#sun)">
     <circle cx="64" cy="64" r="23"/>
     <g>

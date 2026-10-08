@@ -8,6 +8,13 @@ a projekt przestrzega [Semantic Versioning](https://semver.org/lang/pl/).
 ## [Nieopublikowane]
 
 ### Naprawiono (2026-10-08)
+- **Po przełączeniu wtyczki ikona zmieniała się na starą, prawie niewidoczną** (białe
+  słońce) — popup podmieniał ją na `icon-light/dark-*`. Ikonę ustawia teraz
+  background (start, popup, skrót, automatyzacja): kolorowe słońce = włączona,
+  nowe szare słońce = wyłączona. Poprawiony gradient SVG — poziome i pionowe
+  promienie nie miały koloru
+- **Edytor własnego CSS zapisywał tekst do kilku domen** — każde otwarcie dodawało
+  kolejny listener `input`
 - **Przyciski w opcjach nie działały** — import JSON oraz Edytuj / Usuń / Zastosuj
   przy domenach, własnym CSS i presetach miały inline `onclick`, który CSP
   Manifest V3 blokuje. Podpięte przez `addEventListener`; nazwy domen i presetów

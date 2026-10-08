@@ -1,21 +1,17 @@
 # Ikony Wtyczki
 
-W tym katalogu powinny znajdować się ikony wtyczki w trzech rozmiarach dla każdego stanu:
+Ikona na pasku pokazuje stan wtyczki (ustawia ją `updateIcon()` w `background/background.js`):
 
-**Wtyczka wyłączona (tryb jasny):**
-- `icon-light-16.png` - 16x16 px
-- `icon-light-48.png` - 48x48 px
-- `icon-light-128.png` - 128x128 px
+- **Włączona** — kolorowe słońce: `icon-16/32/48/128.png` (źródło: `sun-source.svg`)
+- **Wyłączona** — szare słońce: `icon-off-16/32/48/128.png` (źródło: `sun-off-source.svg`)
 
-**Wtyczka włączona (tryb ciemny):**
-- `icon-dark-16.png` - 16x16 px
-- `icon-dark-48.png` - 48x48 px
-- `icon-dark-128.png` - 128x128 px
+Renderowanie z SVG:
 
-**Razem: 6 ikon** (2 stany × 3 rozmiary)
+```bash
+for s in 16 32 48 128; do rsvg-convert -w $s -h $s sun-source.svg -o icon-$s.png; rsvg-convert -w $s -h $s sun-off-source.svg -o icon-off-$s.png; done
+```
 
-Ikony pokazują stan wtyczki (włączona/wyłączona), nie tryb systemu operacyjnego.
+Gradient w SVG ma `gradientUnits="userSpaceOnUse"` — przy domyślnym `objectBoundingBox`
+poziome i pionowe promienie (zerowa wysokość/szerokość) nie dostają koloru.
 
-Możesz użyć dowolnego edytora graficznego do utworzenia ikon lub wygenerować je programowo.
-Tymczasowo wtyczka będzie używać placeholder ikon.
-
+Stare ikony `icon-light-*` / `icon-dark-*` nie są już używane.
