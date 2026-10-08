@@ -25,10 +25,10 @@ Comet/
 ├── icons/                     # Ikony słoneczka icon-16/32/48/128.png (źródło: sun-source.svg);
 │                              #   stare icon-light-*/icon-dark-* zachowane, nieużywane
 ├── popup/                     # Panel popup (popup.html/.css/.js — 628 linii JS)
-├── options/                   # Strona opcji (options.html/.css/.js — 808 linii JS)
+├── options/                   # Strona opcji (options.html/.css/.js — 820 linii JS)
 ├── content/
-│   ├── content.js             # Content script — orkiestracja, wykrywanie native dark (833 linie)
-│   └── dark-mode-engine.js    # Silnik inwersji kolorów (222 linie)
+│   ├── content.js             # Content script — orkiestracja, wykrywanie native dark (823 linie)
+│   └── dark-mode-engine.js    # Silnik inwersji kolorów (229 linii)
 ├── background/
 │   └── background.js          # Service worker — skróty, alarmy, sync (366 linii)
 ├── docs/ARCHITECTURE.md       # Architektura, przepływ danych, decyzje
@@ -73,6 +73,8 @@ Kolejność ładowania content scripts (z `manifest.json`):
 - Nazewnictwo plików: lowercase z myślnikami (`dark-mode-engine.js`, `domain-matcher.js`)
 - Bez frameworków i bibliotek zewnętrznych — utrzymać lekką, zerozależną implementację
 - Komunikacja content ↔ popup ↔ background przez `chrome.runtime.sendMessage`
+- Strony wtyczki (popup, opcje): bez inline `onclick` — CSP MV3 je blokuje; tylko `addEventListener`
+- Logi w content scripts przez `debugLog()` / `DarkModeEngine.log()` (wyłączone flagą `DEBUG` / `debug`)
 - Trwałość ustawień przez warstwę `utils/storage.js` (nie odwoływać się do `chrome.storage` bezpośrednio z UI)
 - `commit messages` po polsku, zwięzłe
 

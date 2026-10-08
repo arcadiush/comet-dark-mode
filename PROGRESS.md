@@ -27,7 +27,28 @@
   i imporcie/eksporcie tylko dla zgodności. Usunięty też nieużywany `.select-input` z `options.css`. Retest harness: filtr, zmiana na żywo,
   ponowne init, zera, wyłączenie — OK. Docs: README, ARCHITECTURE, CLAUDE, CHANGELOG, blog
 
+- Przegląd wtyczki → naprawione 4 rzeczy (osobne commity):
+  1. Przyciski w opcjach (import JSON, Edytuj/Usuń/Zastosuj) — inline `onclick`
+     blokowany przez CSP MV3 (potwierdzone przez użytkownika: import się nie otwierał).
+     Wspólny helper `createListItem()` w `options.js`, teksty przez `textContent`.
+     Test atrapą chrome.*: wszystkie przyciski działają, `<img onerror>` w nazwie domeny
+     wyświetla się jako tekst
+  2. Biały błysk: `run_at: document_start`, filtr od razu po `loadConfig()`, detekcja
+     native dark po `DOMContentLoaded` (filtr zdejmowany i przywracany w jednym zadaniu).
+     Style idą do `<html>`, gdy brak `<head>`. Test: jasna strona ciemnieje, strona
+     z ciemnym tłem / klasą `dark` → filtr zdjęty + powiadomienie
+  3. Usunięte `scripting` i `web_accessible_resources`
+  4. `console.log` w content scripts za flagą (`DEBUG` w `content.js`, `debug`
+     w silniku). Test: 0 logów przy wyłączonej fladze
+- NIE zweryfikowane w prawdziwej wtyczce: brak błysku (harness nie mierzy pierwszego
+  malowania) — do sprawdzenia przez użytkownika
+
 ### Do zrobienia
+- Test w prawdziwej wtyczce: brak białego błysku, przyciski w opcjach, strona
+  natywnie ciemna (np. GitHub w trybie ciemnym) → powiadomienie
+- Bug: `showCustomCSSDialog()` w `options.js` dodaje nowy listener `input` przy każdym
+  wywołaniu — po edycji CSS dla 2 domen pisanie zapisuje tekst do obu
+- Wariant Firefox: `CLAUDE.md` wspomina V2, w repo brak manifestu — dodać lub poprawić docs
 - Daty w `CHANGELOG.md` (pominięte na razie — brak dat wydań w git)
 - Zrzut `blog/images/opcje.png` nadal pokazuje wybór silnika — do odświeżenia
 - MutationObserver w `content.js` (~l. 785–800) ma pusty callback — nic nie robi

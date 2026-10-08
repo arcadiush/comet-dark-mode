@@ -7,6 +7,20 @@ a projekt przestrzega [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Nieopublikowane]
 
+### Naprawiono (2026-10-08)
+- **Przyciski w opcjach nie działały** — import JSON oraz Edytuj / Usuń / Zastosuj
+  przy domenach, własnym CSS i presetach miały inline `onclick`, który CSP
+  Manifest V3 blokuje. Podpięte przez `addEventListener`; nazwy domen i presetów
+  wstawiane jako tekst (bez interpretacji HTML)
+- **Biały błysk przy ładowaniu stron** — content scripts startują na `document_start`
+  i wstrzykują filtr przed renderowaniem; wykrywanie natywnego dark mode po
+  `DOMContentLoaded`
+
+### Zmieniono (2026-10-08)
+- Usunięte zbędne uprawnienie `scripting` i `web_accessible_resources`
+  (strony nie mogą już wykryć wtyczki przez jej pliki)
+- Logi diagnostyczne w konsoli stron domyślnie wyłączone (błędy nadal logowane)
+
 ### Usunięto
 - **Tryb renderowania "Analiza"** i wybór silnika w opcjach. Dawał ten sam efekt
   co "Filtr" (jedyna różnica: cache CSS per URL, który powodował błędy). Zapisane

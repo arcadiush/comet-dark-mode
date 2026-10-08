@@ -4,6 +4,12 @@
 
 const DarkModeEngine = {
   styleId: 'comet-dark-mode-style',
+  // Logi diagnostyczne - włącz na true do debugowania (błędy logowane zawsze)
+  debug: false,
+
+  log(...args) {
+    if (this.debug) console.log(...args);
+  },
 
   /**
    * Inicjalizuje silnik trybu ciemnego
@@ -114,7 +120,7 @@ const DarkModeEngine = {
   enableFilterMode() {
     const filterValue = this.buildFilterValue();
 
-    console.log('[DarkModeEngine] Wygenerowany filtr CSS:', filterValue);
+    this.log('[DarkModeEngine] Wygenerowany filtr CSS:', filterValue);
 
     const css = `
       html {
@@ -152,11 +158,11 @@ const DarkModeEngine = {
     
     if (style) {
       // Aktualizuj istniejący element style
-      console.log('[DarkModeEngine] Aktualizuję istniejący element style');
+      this.log('[DarkModeEngine] Aktualizuję istniejący element style');
       style.textContent = css;
     } else {
       // Utwórz nowy element style
-      console.log('[DarkModeEngine] Tworzę nowy element style');
+      this.log('[DarkModeEngine] Tworzę nowy element style');
       style = document.createElement('style');
       style.id = this.styleId;
       style.textContent = css;
@@ -172,7 +178,7 @@ const DarkModeEngine = {
     // Sprawdź czy style zostały wstrzyknięte/aktualizowane
     const injected = document.getElementById(this.styleId);
     if (injected) {
-      console.log('[DarkModeEngine] Style wstrzyknięte/aktualizowane pomyślnie, długość CSS:', css.length);
+      this.log('[DarkModeEngine] Style wstrzyknięte/aktualizowane pomyślnie, długość CSS:', css.length);
       
       // Wymuś ponowne obliczenie stylów
       // To może pomóc w niektórych przypadkach gdy przeglądarka nie aktualizuje wizualnie
@@ -183,7 +189,7 @@ const DarkModeEngine = {
         // Sprawdź computed style na html
         const htmlStyle = window.getComputedStyle(document.documentElement);
         const filterValue = htmlStyle.filter;
-        console.log('[DarkModeEngine] Aktualny filtr na html:', filterValue);
+        this.log('[DarkModeEngine] Aktualny filtr na html:', filterValue);
         
         // Jeśli filtr nie jest zastosowany, spróbuj bezpośrednio
         if (!filterValue || filterValue === 'none') {
@@ -192,7 +198,7 @@ const DarkModeEngine = {
           const filterMatch = css.match(/html\s*\{[^}]*filter:\s*([^!;]+)/);
           if (filterMatch && filterMatch[1]) {
             const filterValueFromCSS = filterMatch[1].trim();
-            console.log('[DarkModeEngine] Ustawiam filtr bezpośrednio:', filterValueFromCSS);
+            this.log('[DarkModeEngine] Ustawiam filtr bezpośrednio:', filterValueFromCSS);
             document.documentElement.style.setProperty('filter', filterValueFromCSS, 'important');
           }
         }

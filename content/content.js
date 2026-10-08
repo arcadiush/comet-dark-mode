@@ -8,6 +8,13 @@
 (function() {
   'use strict';
 
+  // Logi diagnostyczne - wyłączone, żeby nie śmiecić w konsoli każdej strony.
+  // Do debugowania ustaw DEBUG = true (błędy i ostrzeżenia logowane zawsze)
+  const DEBUG = false;
+  const debugLog = (...args) => {
+    if (DEBUG) console.log(...args);
+  };
+
   // Sprawdź czy skrypt nie został już załadowany
   if (window.cometDarkModeLoaded) {
     return;
@@ -24,26 +31,26 @@
    */
   async function init() {
     try {
-      console.log('[Comet Dark Mode] Inicjalizacja rozpoczęta');
+      debugLog('[Comet Dark Mode] Inicjalizacja rozpoczęta');
       
       // Pobierz domenę
       domain = window.location.hostname;
-      console.log('[Comet Dark Mode] Domenę:', domain);
+      debugLog('[Comet Dark Mode] Domenę:', domain);
       
       // Sprawdź dostępność DarkModeEngine
       if (typeof DarkModeEngine === 'undefined') {
         console.warn('[Comet Dark Mode] DarkModeEngine nie jest dostępny, używam fallback');
       } else {
-        console.log('[Comet Dark Mode] DarkModeEngine dostępny');
+        debugLog('[Comet Dark Mode] DarkModeEngine dostępny');
       }
       
       // Pobierz konfigurację
       await loadConfig();
-      console.log('[Comet Dark Mode] Konfiguracja załadowana, enabled:', isEnabled);
+      debugLog('[Comet Dark Mode] Konfiguracja załadowana, enabled:', isEnabled);
       
       // Sprawdź czy wtyczka powinna być aktywna dla tej domeny
       const shouldBeActive = shouldBeActiveForDomain();
-      console.log('[Comet Dark Mode] Powinna być aktywna:', shouldBeActive);
+      debugLog('[Comet Dark Mode] Powinna być aktywna:', shouldBeActive);
 
       // Skrypt działa od document_start: włącz filtr od razu, zanim strona się
       // wyrenderuje, żeby nie było białego błysku
@@ -63,7 +70,7 @@
       const hasNativeDarkMode = detectNativeDarkMode();
       
       if (hasNativeDarkMode && shouldBeActive && isEnabled) {
-        console.log('[Comet Dark Mode] Strona ma już domyślnie włączony tryb ciemny - pomijam włączenie wtyczki');
+        debugLog('[Comet Dark Mode] Strona ma już domyślnie włączony tryb ciemny - pomijam włączenie wtyczki');
         // Wyświetl powiadomienie na stronie
         showPageNotification();
         // Wyślij wiadomość do popup o wykryciu trybu ciemnego
@@ -74,11 +81,11 @@
           // Ignoruj błędy jeśli popup nie jest otwarty
         });
       } else if (shouldBeActive && isEnabled) {
-        console.log('[Comet Dark Mode] Włączanie trybu ciemnego...');
+        debugLog('[Comet Dark Mode] Włączanie trybu ciemnego...');
         enableDarkMode();
-        console.log('[Comet Dark Mode] Tryb ciemny włączony');
+        debugLog('[Comet Dark Mode] Tryb ciemny włączony');
       } else {
-        console.log('[Comet Dark Mode] Tryb ciemny wyłączony');
+        debugLog('[Comet Dark Mode] Tryb ciemny wyłączony');
         disableDarkMode();
       }
 
@@ -125,14 +132,14 @@
               } else {
                 config = data;
                 isEnabled = config.enabled || false;
-                console.log('[Comet Dark Mode] Config z local storage:', config);
+                debugLog('[Comet Dark Mode] Config z local storage:', config);
                 resolve();
               }
             });
           } else {
             config = data;
             isEnabled = config.enabled || false;
-            console.log('[Comet Dark Mode] Config z sync storage:', config);
+            debugLog('[Comet Dark Mode] Config z sync storage:', config);
             resolve();
           }
         });
@@ -227,7 +234,7 @@
       if (colorSchemeMeta && colorSchemeMeta.content) {
         const schemes = colorSchemeMeta.content.toLowerCase().split(/\s+/);
         if (schemes.includes('dark') && !schemes.includes('light')) {
-          console.log('[Comet Dark Mode] Wykryto tryb ciemny przez meta color-scheme');
+          debugLog('[Comet Dark Mode] Wykryto tryb ciemny przez meta color-scheme');
           return true;
         }
       }
@@ -236,7 +243,7 @@
       const htmlStyle = window.getComputedStyle(document.documentElement);
       const colorScheme = htmlStyle.colorScheme;
       if (colorScheme && colorScheme.includes('dark') && !colorScheme.includes('light')) {
-        console.log('[Comet Dark Mode] Wykryto tryb ciemny przez CSS color-scheme');
+        debugLog('[Comet Dark Mode] Wykryto tryb ciemny przez CSS color-scheme');
         return true;
       }
 
@@ -248,7 +255,7 @@
         htmlClasses.includes(cls) || bodyClasses.includes(cls)
       );
       if (hasDarkClass) {
-        console.log('[Comet Dark Mode] Wykryto tryb ciemny przez klasę CSS');
+        debugLog('[Comet Dark Mode] Wykryto tryb ciemny przez klasę CSS');
         return true;
       }
 
@@ -256,7 +263,7 @@
       const htmlTheme = document.documentElement.getAttribute('data-theme');
       const htmlColorMode = document.documentElement.getAttribute('data-color-mode');
       if (htmlTheme === 'dark' || htmlColorMode === 'dark') {
-        console.log('[Comet Dark Mode] Wykryto tryb ciemny przez atrybut data-theme/data-color-mode');
+        debugLog('[Comet Dark Mode] Wykryto tryb ciemny przez atrybut data-theme/data-color-mode');
         return true;
       }
 
@@ -296,7 +303,7 @@
 
         // Sprawdź tylko jeśli oba (body i html) mają ciemne tło - to zwiększa pewność
         if (bodyColor && htmlColor && isDarkBackground(bodyColor) && isDarkBackground(htmlColor)) {
-          console.log('[Comet Dark Mode] Wykryto tryb ciemny przez ciemne tło (body i html)');
+          debugLog('[Comet Dark Mode] Wykryto tryb ciemny przez ciemne tło (body i html)');
           return true;
         }
       }
@@ -437,7 +444,7 @@
    */
   function enableDarkMode() {
     try {
-      console.log('[Comet Dark Mode] enableDarkMode() wywołane');
+      debugLog('[Comet Dark Mode] enableDarkMode() wywołane');
       
       // Pobierz ustawienia per-domena jeśli istnieją
       const perDomainSettings = config.perDomainSettings && config.perDomainSettings[domain];
@@ -450,29 +457,29 @@
         grayscale: perDomainSettings?.grayscale ?? config.grayscale ?? 0
       };
 
-      console.log('[Comet Dark Mode] Config:', engineConfig);
+      debugLog('[Comet Dark Mode] Config:', engineConfig);
       
       if (typeof DarkModeEngine !== 'undefined') {
-        console.log('[Comet Dark Mode] Używam DarkModeEngine');
+        debugLog('[Comet Dark Mode] Używam DarkModeEngine');
         DarkModeEngine.init(engineConfig);
         DarkModeEngine.enable();
         
         // Sprawdź czy style zostały wstrzyknięte
         const style = document.getElementById('comet-dark-mode-style');
         if (style) {
-          console.log('[Comet Dark Mode] Style wstrzyknięte pomyślnie');
+          debugLog('[Comet Dark Mode] Style wstrzyknięte pomyślnie');
         } else {
           console.warn('[Comet Dark Mode] Style nie zostały wstrzyknięte!');
         }
       } else {
-        console.log('[Comet Dark Mode] Używam fallback (prosty filtr)');
+        debugLog('[Comet Dark Mode] Używam fallback (prosty filtr)');
         // Fallback - użyj prostego filtra
         applySimpleFilter();
         
         // Sprawdź czy style zostały wstrzyknięte
         const style = document.getElementById('comet-dark-mode-style');
         if (style) {
-          console.log('[Comet Dark Mode] Fallback style wstrzyknięte');
+          debugLog('[Comet Dark Mode] Fallback style wstrzyknięte');
         } else {
           console.error('[Comet Dark Mode] Fallback style nie zostały wstrzyknięte!');
         }
@@ -637,7 +644,7 @@
 
         // Jeśli zmieniły się tylko filtry i tryb jest włączony, użyj updateConfig zamiast init
         if (isFilterChange && !isEnabledChange && shouldBeActive && isEnabled) {
-          console.log('[Comet Dark Mode] Zmiana filtrów w storage, aktualizuję konfigurację');
+          debugLog('[Comet Dark Mode] Zmiana filtrów w storage, aktualizuję konfigurację');
           if (typeof DarkModeEngine !== 'undefined' && DarkModeEngine.isEnabled()) {
             // Silnik jest już zainicjalizowany, użyj updateConfig
             const perDomainSettings = config.perDomainSettings && config.perDomainSettings[domain];
@@ -649,7 +656,7 @@
               hueRotate: perDomainSettings?.hueRotate ?? config.hueRotate ?? 0,
               grayscale: perDomainSettings?.grayscale ?? config.grayscale ?? 0
             });
-            console.log('[Comet Dark Mode] Konfiguracja zaktualizowana przez storage.onChanged');
+            debugLog('[Comet Dark Mode] Konfiguracja zaktualizowana przez storage.onChanged');
           } else {
             // Silnik nie jest zainicjalizowany, użyj enableDarkMode
             enableDarkMode();
@@ -659,7 +666,7 @@
           // Sprawdź czy strona ma natywny tryb ciemny PRZED włączeniem wtyczki
           const hasNativeDarkMode = detectNativeDarkMode();
           if (hasNativeDarkMode && shouldBeActive && isEnabled) {
-            console.log('[Comet Dark Mode] Strona ma natywny tryb ciemny - pomijam włączenie wtyczki');
+            debugLog('[Comet Dark Mode] Strona ma natywny tryb ciemny - pomijam włączenie wtyczki');
             showPageNotification();
             disableDarkMode(); // Upewnij się, że wtyczka jest wyłączona
           } else if (shouldBeActive && isEnabled) {
@@ -679,7 +686,7 @@
           // Sprawdź czy strona ma natywny tryb ciemny PRZED włączeniem wtyczki
           const hasNativeDarkMode = detectNativeDarkMode();
           if (hasNativeDarkMode && shouldBeActive && isEnabled) {
-            console.log('[Comet Dark Mode] Strona ma natywny tryb ciemny - pomijam włączenie wtyczki');
+            debugLog('[Comet Dark Mode] Strona ma natywny tryb ciemny - pomijam włączenie wtyczki');
             showPageNotification();
             disableDarkMode();
           } else if (shouldBeActive && isEnabled) {
@@ -690,7 +697,7 @@
         });
       } else if (message.action === 'updateConfig') {
         // Aktualizacja na żywo z popup (suwaki)
-        console.log('[Comet Dark Mode] Aktualizacja konfiguracji na żywo:', message.config);
+        debugLog('[Comet Dark Mode] Aktualizacja konfiguracji na żywo:', message.config);
         
         // Zaktualizuj lokalną konfigurację
         if (message.config.brightness !== undefined) {
@@ -714,12 +721,12 @@
         
         // Jeśli tryb ciemny jest włączony, zaktualizuj style na żywo
         const shouldBeActive = shouldBeActiveForDomain();
-        console.log('[Comet Dark Mode] shouldBeActive:', shouldBeActive, 'isEnabled:', isEnabled);
+        debugLog('[Comet Dark Mode] shouldBeActive:', shouldBeActive, 'isEnabled:', isEnabled);
         
         if (shouldBeActive && isEnabled) {
           // Zaktualizuj silnik z nową konfiguracją
           if (typeof DarkModeEngine !== 'undefined') {
-            console.log('[Comet Dark Mode] Aktualizuję DarkModeEngine z nową konfiguracją:', {
+            debugLog('[Comet Dark Mode] Aktualizuję DarkModeEngine z nową konfiguracją:', {
               brightness: config.brightness ?? 0,
               contrast: config.contrast ?? 100,
               sepia: config.sepia ?? 0,
@@ -736,14 +743,14 @@
               hueRotate: config.hueRotate ?? 0,
               grayscale: config.grayscale ?? 0
             });
-            console.log('[Comet Dark Mode] Style zaktualizowane');
+            debugLog('[Comet Dark Mode] Style zaktualizowane');
           } else {
-            console.log('[Comet Dark Mode] DarkModeEngine nie jest dostępny, używam fallback');
+            debugLog('[Comet Dark Mode] DarkModeEngine nie jest dostępny, używam fallback');
             // Fallback - zastosuj prosty filtr z nową konfiguracją
             applySimpleFilter();
           }
         } else {
-          console.log('[Comet Dark Mode] Tryb ciemny nie jest aktywny, pomijam aktualizację');
+          debugLog('[Comet Dark Mode] Tryb ciemny nie jest aktywny, pomijam aktualizację');
         }
         
         sendResponse({ success: true });
