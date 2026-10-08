@@ -117,7 +117,7 @@ Stan włączenia wykrywany przez obecność elementu `<style id="comet-dark-mode
 
 - **Brak zewnętrznych API/usług.** Wtyczka działa w pełni offline.
 - API przeglądarki: `chrome.storage`, `chrome.tabs`, `chrome.runtime`,
-  `chrome.scripting`, `chrome.alarms`, `chrome.commands`.
+  `chrome.alarms`, `chrome.commands`.
 - `host_permissions: <all_urls>` — inwersja działa na dowolnej stronie.
 
 ## Ograniczenia — czego NIE robimy (i dlaczego)

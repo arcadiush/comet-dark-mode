@@ -14,7 +14,7 @@ obrazów, wideo i iframe. Bez zewnętrznych zależności.
 - **Vanilla JavaScript (ES6+)** — moduły ES (`"type": "module"` w service workerze)
 - **HTML5 + CSS3** — UI popup i strony opcji
 - Brak buildu, brak npm/node — czysty kod ładowany bezpośrednio przez przeglądarkę
-- API przeglądarki: `chrome.storage`, `chrome.tabs`, `chrome.scripting`,
+- API przeglądarki: `chrome.storage`, `chrome.tabs`,
   `chrome.alarms`, `chrome.runtime`
 
 ## Struktura projektu
