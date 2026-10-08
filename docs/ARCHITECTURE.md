@@ -66,9 +66,11 @@ Kluczowe ścieżki:
    `updateEnabledState()`, które zapisuje storage i `notifyAllTabs()`.
 4. **Preferencja systemowa** — service worker nie ma `matchMedia`, więc pyta
    content script (`action: 'checkSystemPreference'`), a ten odpowiada `isDark`.
-5. **Inicjalizacja na stronie** — `content.js` **najpierw** wykrywa natywny
-   dark mode (`detectNativeDarkMode()`), a dopiero potem decyduje o włączeniu —
-   kolejność jest istotna (patrz decyzje niżej).
+5. **Inicjalizacja na stronie** — content scripts startują na `document_start`.
+   `content.js` ładuje config i od razu wstrzykuje filtr (bez białego błysku),
+   po `DOMContentLoaded` na chwilę zdejmuje filtr, wykrywa natywny dark mode
+   (`detectNativeDarkMode()`) i przywraca filtr albo go zostawia wyłączonym
+   (patrz decyzje niżej).
 
 ## Silnik renderowania (`DarkModeEngine`)
 
@@ -96,10 +98,13 @@ Stan włączenia wykrywany przez obecność elementu `<style id="comet-dark-mode
   między urządzeniami użytkownika; przy błędzie sync (limit, brak konta) kod
   cicho przechodzi na `local`. Wzorzec powtórzony w `storage.js`, `content.js`
   i `background.js`.
-- **Wykrywanie native dark PRZED włączeniem** — gdyby wtyczka najpierw włączyła
-  inwersję, każda strona wyglądałaby na ciemną i detekcja dawałaby false
-  positive. Dlatego `detectNativeDarkMode()` biegnie pierwszy i przy trafieniu
-  wtyczka pomija inwersję + pokazuje powiadomienie.
+- **Wykrywanie native dark bez naszego filtra** — detekcja musi widzieć oryginalne
+  style strony, inaczej dawałaby fałszywe wyniki. Filtr jest wstrzykiwany już na
+  `document_start` (bez białego błysku), więc po `DOMContentLoaded` `content.js`
+  zdejmuje go, uruchamia `detectNativeDarkMode()` i przywraca w tym samym zadaniu
+  JS (bez odmalowania). Przy trafieniu filtr zostaje zdjęty + powiadomienie.
+  Koszt: strona natywnie ciemna może przez ułamek sekundy mignąć odwrócona (jasna).
+  Style (silnik, `css-injector.js`) trafiają do `<html>`, gdy `<head>` jeszcze nie istnieje.
 - **Guard `window.cometDarkModeLoaded`** — chroni przed podwójnym wykonaniem
   content scriptu (re-injection, wielokrotne dopasowania).
 - **Obliczanie wschodu/zachodu lokalnie** — `background.js` liczy je wzorem

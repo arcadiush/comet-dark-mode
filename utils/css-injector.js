@@ -24,7 +24,7 @@ const CSSInjector = {
     style.textContent = css;
 
     // Wstrzyknij na początku head dla priorytetu
-    const head = document.head || document.getElementsByTagName('head')[0];
+    const head = document.head || document.documentElement;
     if (head.firstChild) {
       head.insertBefore(style, head.firstChild);
     } else {
@@ -64,7 +64,7 @@ const CSSInjector = {
     style.id = this.CUSTOM_CSS_ID;
     style.textContent = css;
 
-    const head = document.head || document.getElementsByTagName('head')[0];
+    const head = document.head || document.documentElement;
     if (head.firstChild) {
       head.insertBefore(style, head.firstChild);
     } else {

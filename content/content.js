@@ -30,9 +30,6 @@
       domain = window.location.hostname;
       console.log('[Comet Dark Mode] Domenę:', domain);
       
-      // Czekaj na gotowość DOM z retry
-      await waitForDOM();
-      
       // Sprawdź dostępność DarkModeEngine
       if (typeof DarkModeEngine === 'undefined') {
         console.warn('[Comet Dark Mode] DarkModeEngine nie jest dostępny, używam fallback');
@@ -44,12 +41,26 @@
       await loadConfig();
       console.log('[Comet Dark Mode] Konfiguracja załadowana, enabled:', isEnabled);
       
-      // WAŻNE: Sprawdź czy strona ma już domyślnie włączony tryb ciemny PRZED włączeniem wtyczki
-      const hasNativeDarkMode = detectNativeDarkMode();
-      
       // Sprawdź czy wtyczka powinna być aktywna dla tej domeny
       const shouldBeActive = shouldBeActiveForDomain();
       console.log('[Comet Dark Mode] Powinna być aktywna:', shouldBeActive);
+
+      // Skrypt działa od document_start: włącz filtr od razu, zanim strona się
+      // wyrenderuje, żeby nie było białego błysku
+      if (shouldBeActive && isEnabled) {
+        enableDarkMode();
+      }
+
+      // Wykrywanie natywnego dark mode wymaga gotowego DOM i stylów strony
+      await waitForDOM();
+
+      // Sprawdź stronę bez naszego filtra (detectNativeDarkMode pomija analizę tła,
+      // gdy nasz styl istnieje). Usunięcie i ponowne dodanie w jednym zadaniu
+      // nie powoduje odmalowania strony
+      if (shouldBeActive && isEnabled) {
+        disableDarkMode();
+      }
+      const hasNativeDarkMode = detectNativeDarkMode();
       
       if (hasNativeDarkMode && shouldBeActive && isEnabled) {
         console.log('[Comet Dark Mode] Strona ma już domyślnie włączony tryb ciemny - pomijam włączenie wtyczki');
@@ -83,28 +94,15 @@
   }
 
   /**
-   * Czeka na gotowość DOM z retry mechanism
+   * Czeka na sparsowanie dokumentu (DOMContentLoaded)
    */
   function waitForDOM() {
     return new Promise((resolve) => {
-      if (document.body || document.documentElement) {
+      if (document.readyState !== 'loading') {
         resolve();
         return;
       }
-
-      let attempts = 0;
-      const maxAttempts = 50; // 5 sekund max
-      const interval = setInterval(() => {
-        attempts++;
-        if (document.body || document.documentElement) {
-          clearInterval(interval);
-          resolve();
-        } else if (attempts >= maxAttempts) {
-          clearInterval(interval);
-          console.warn('[Comet Dark Mode] DOM nie jest gotowy po 5 sekundach, kontynuuję...');
-          resolve(); // Kontynuuj mimo wszystko
-        }
-      }, 100);
+      document.addEventListener('DOMContentLoaded', resolve, { once: true });
     });
   }
 
@@ -604,7 +602,7 @@
     style.id = id;
     style.textContent = css;
 
-    const head = document.head || document.getElementsByTagName('head')[0];
+    const head = document.head || document.documentElement;
     if (head.firstChild) {
       head.insertBefore(style, head.firstChild);
     } else {
@@ -812,15 +810,7 @@
     }
   }
 
-  // Inicjalizuj - document_idle powinien zapewnić gotowość DOM
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else if (document.readyState === 'interactive' || document.readyState === 'complete') {
-    // DOM jest gotowy lub prawie gotowy
-    init();
-  } else {
-    // Fallback - uruchom po krótkim opóźnieniu
-    setTimeout(init, 100);
-  }
+  // Inicjalizuj od razu (document_start) - init() sam czeka na DOM tam, gdzie go potrzebuje
+  init();
 })();
 

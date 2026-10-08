@@ -140,7 +140,8 @@ const DarkModeEngine = {
    * @param {string} css - Kod CSS
    */
   injectStyle(css) {
-    const head = document.head || document.getElementsByTagName('head')[0];
+    // Przy document_start <head> jeszcze nie istnieje - wtedy wstawiamy do <html>
+    const head = document.head || document.documentElement;
     if (!head) {
       console.error('[DarkModeEngine] Brak elementu head!');
       return;
