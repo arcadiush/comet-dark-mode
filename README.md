@@ -4,6 +4,8 @@ Lekka i wydajna wtyczka do przeglądarek (Chrome, Firefox, Edge) umożliwiająca
 
 **Aktualna wersja:** 1.2.3 | [Historia zmian (CHANGELOG)](CHANGELOG.md)
 
+![Comet Dark Mode — ta sama strona przed i po włączeniu trybu ciemnego](store/images/screenshot-1-przed-po.png)
+
 ## Funkcjonalności
 
 ### Podstawowe
