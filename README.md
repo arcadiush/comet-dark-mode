@@ -30,9 +30,7 @@ Lekka i wydajna wtyczka do przeglądarek (Chrome, Firefox, Edge) umożliwiająca
 ### Zaawansowane
 - **Ustawienia per-domena** - Unikalne ustawienia jasności, kontrastu i sepii dla konkretnych stron
 - **Własne reguły CSS** - Możliwość wstrzyknięcia własnego kodu CSS dla wybranych stron
-- **Wybór silnika renderowania**:
-  - **Tryb "Filtr"** (Szybki) - Bazuje na `filter: invert()` - błyskawiczny, minimalny narzut
-  - **Tryb "Analiza"** - Obecnie ten sam efekt co "Filtr", dodatkowo cache CSS per URL (realna analiza per-element niezaimplementowana)
+- **Silnik renderowania** - Bazuje na `filter: invert()` - błyskawiczny, minimalny narzut
 
 ### Presety
 - **Szybkie przełączanie** - Zapisz aktualne ustawienia jako preset i przełączaj się między nimi jednym kliknięciem

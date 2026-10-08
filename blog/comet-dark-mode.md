@@ -98,16 +98,11 @@ automatyzację i listy wyjątków, po presety oraz eksport/import:
 
 ---
 
-## Dwa silniki renderowania
+## Jak działa silnik
 
-W ustawieniach zaawansowanych wybierzesz sposób działania:
-
-- **Filtr (Szybki)** — stosuje inwersję kolorów na całej stronie. Błyskawiczny,
-  minimalny narzut, sprawdza się na zdecydowanej większości stron.
-- **Analiza** — daje obecnie ten sam efekt co „Filtr", dodatkowo cache'uje
-  wygenerowany CSS dla danego adresu.
-
-W praktyce **domyślny tryb „Filtr" jest tym, którego potrzebujesz.**
+Comet stosuje inwersję kolorów na całej stronie jednym filtrem CSS, a obrazy,
+wideo i ramki odwraca z powrotem, żeby zachowały oryginalne kolory. To
+błyskawiczne, ma minimalny narzut i sprawdza się na zdecydowanej większości stron.
 
 ---
 

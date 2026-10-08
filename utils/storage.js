@@ -123,7 +123,7 @@ const Storage = {
     blacklist: [],
     perDomainSettings: {},
     customCSS: {},
-    renderEngine: 'filter', // 'filter' | 'analyze'
+    renderEngine: 'filter', // jedyny silnik; pole zostaje dla zgodności importu/eksportu
     visibleSliders: {
       brightness: true,
       contrast: true,

@@ -21,7 +21,7 @@ znajdują się w [`../CLAUDE.md`](../CLAUDE.md).
 | `manifest.json` | Manifest V3: uprawnienia, rejestracja content scripts (z kolejnością), akcja, opcje, skróty |
 | `icons/` | Ikony light/dark w rozmiarach 16/48/128 px |
 | `background/background.js` | Service worker — automatyzacja, alarmy, synchronizacja między kartami, skróty |
-| `content/dark-mode-engine.js` | Silnik renderowania (tryb `filter` i `analyze`) — obiekt globalny `DarkModeEngine` |
+| `content/dark-mode-engine.js` | Silnik renderowania (filtr CSS na `html`) — obiekt globalny `DarkModeEngine` |
 | `content/content.js` | Orkiestracja na stronie: ładowanie configu, decyzja o włączeniu, wykrywanie native dark, MutationObserver |
 | `popup/` | Panel popup — szybkie przełączanie i suwaki |
 | `options/` | Pełna strona ustawień — presety, listy domen, per-domena, CSS, eksport/import |
@@ -72,21 +72,17 @@ Kluczowe ścieżki:
 
 ## Silnik renderowania (`DarkModeEngine`)
 
-Globalny obiekt z dwoma trybami wybieranymi w ustawieniach:
+Globalny obiekt z jednym trybem: reguła `filter: invert()` na `html` z
+odwróceniem inwersji na mediach (obrazy, wideo, iframe). Minimalny narzut.
 
-- **`filter`** (Szybki) — jedna reguła `filter: invert()` na `html` z
-  odwróceniem inwersji na mediach (obrazy, wideo, iframe). Minimalny narzut.
-- **`analyze`** — **UWAGA: nie wykonuje jeszcze realnej
-  analizy CSS per-element.** Generuje ten sam filtr co tryb `filter` (na `html`
-  + wykluczenia mediów), a jedyną praktyczną różnicą jest **cache CSS per URL**
-  (`this.cache`). Prawdziwa analiza (dedykowane reguły dla poszczególnych
-  elementów) pozostaje do zaimplementowania — w kodzie jest tylko zaczątek
-  (`getElementSelector()`, obecnie nieużywany).
+Wartość `filter` (wszystkie sześć suwaków: jasność, kontrast, sepia, nasycenie,
+obrót odcienia, szarość) buduje metoda `buildFilterValue()`. Komplet parametrów
+jest utrwalany w `this.config` już w `init(config)`.
 
-Wspólne budowanie wartości `filter` (uwzględniające wszystkie sześć suwaków:
-jasność, kontrast, sepia, nasycenie, obrót odcienia, szarość) jest w metodzie
-`buildFilterValue()`, z której korzystają **oba** tryby — dzięki temu dają
-spójny wynik. Komplet parametrów jest utrwalany w `this.config` już w `init()`.
+Do 2026-10-08 istniał drugi tryb „Analiza” (`analyze`). Dawał ten sam efekt co
+filtr, plus cache CSS per URL. Usunięty, bo nie wykonywał realnej analizy CSS,
+a jego cache powodował błąd (ignorowanie suwaków). Pole `renderEngine`
+w storage zostaje tylko dla zgodności importu/eksportu, silnik go nie czyta.
 
 Stan włączenia wykrywany przez obecność elementu `<style id="comet-dark-mode-style">`.
 

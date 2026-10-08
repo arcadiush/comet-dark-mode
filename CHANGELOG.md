@@ -7,6 +7,11 @@ a projekt przestrzega [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Nieopublikowane]
 
+### Usunięto
+- **Tryb renderowania "Analiza"** i wybór silnika w opcjach. Dawał ten sam efekt
+  co "Filtr" (jedyna różnica: cache CSS per URL, który powodował błędy). Zapisane
+  ustawienie `renderEngine: 'analyze'` jest ignorowane — działa zawsze Filtr
+
 ### Naprawiono
 - **Tryb "Analiza" ignorował zmiany suwaków** po pierwszym włączeniu na stronie —
   cache CSS był kluczowany samym URL, więc przy kolejnym `enable()` / `updateConfig()`

@@ -109,9 +109,6 @@ function populateForm() {
   document.getElementById('whitelist').value = (config.whitelist || []).join('\n');
   document.getElementById('blacklist').value = (config.blacklist || []).join('\n');
 
-  // Zaawansowane
-  document.getElementById('renderEngine').value = config.renderEngine || 'filter';
-
   // Per-domena
   renderPerDomainList();
   renderCustomCSSList();
@@ -345,8 +342,7 @@ async function saveOptions() {
         }
       },
       whitelist: parseDomainList(document.getElementById('whitelist').value),
-      blacklist: parseDomainList(document.getElementById('blacklist').value),
-      renderEngine: document.getElementById('renderEngine').value
+      blacklist: parseDomainList(document.getElementById('blacklist').value)
     };
 
     // Zachowaj istniejące ustawienia per-domena i custom CSS

@@ -28,7 +28,7 @@ Comet/
 ├── options/                   # Strona opcji (options.html/.css/.js — 808 linii JS)
 ├── content/
 │   ├── content.js             # Content script — orkiestracja, wykrywanie native dark (833 linie)
-│   └── dark-mode-engine.js    # Silnik inwersji kolorów (339 linii)
+│   └── dark-mode-engine.js    # Silnik inwersji kolorów (222 linie)
 ├── background/
 │   └── background.js          # Service worker — skróty, alarmy, sync (366 linii)
 ├── docs/ARCHITECTURE.md       # Architektura, przepływ danych, decyzje
@@ -48,7 +48,7 @@ Kolejność ładowania content scripts (z `manifest.json`):
 
 ### [x] Ukończone (v1.1.0)
 - Globalny przełącznik trybu ciemnego (popup + skrót `Ctrl/Cmd+Shift+D`)
-- Dwa silniki: **Filtr** (`filter: invert()`, szybki) i **Analiza** (obecnie ten sam filtr + cache per URL; realna analiza CSS per-element niezaimplementowana — patrz `docs/ARCHITECTURE.md`)
+- Silnik **Filtr** (`filter: invert()` na `html`, media odwracane z powrotem); tryb "Analiza" usunięty 2026-10-08
 - Regulacje: jasność, kontrast, sepia, nasycenie, obrót odcienia, szarość
 - Automatyzacja: sync z systemem, harmonogram czasowy, geolokalizacja (zachód słońca)
 - Whitelist / blacklist domen, ustawienia per-domena, własne reguły CSS
@@ -65,8 +65,6 @@ Kolejność ładowania content scripts (z `manifest.json`):
 
 ### [ ] Planowane / do zrobienia
 - Uzupełnić daty wydań w `CHANGELOG.md` (obecnie `2024-12-XX`, `2024-XX-XX`)
-- Zweryfikować w przeglądarce oba silniki z ustawionym nasyceniem/szarością
-- Decyzja: tryb "Analiza" dokończyć (realna analiza CSS) czy usunąć — patrz `PROGRESS.md`
 - [DO UZUPEŁNIENIA] — pozostałe priorytety ustalane per sesja w `PROGRESS.md`
 
 ## Konwencje i zasady kodu
@@ -83,8 +81,6 @@ Kolejność ładowania content scripts (z `manifest.json`):
 - Ikony są wymagane do załadowania wtyczki — ich brak = błąd ładowania (patrz `INSTALACJA.md`)
 - W Firefoksie wtyczka ładowana tymczasowo (znika po zamknięciu przeglądarki bez pakowania `.xpi`)
 - Daty w `CHANGELOG.md` niekompletne
-- Tryb "Analiza" daje ten sam efekt co "Filtr" (różni je tylko cache per URL)
-- `getElementSelector()` w `dark-mode-engine.js` — martwy kod (zaczątek analizy)
 - [DO UZUPEŁNIENIA] — bugi zgłaszane w trakcie sesji dopisywać do `PROGRESS.md`
 
 ## Instrukcja dla Claude

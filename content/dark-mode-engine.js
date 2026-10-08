@@ -1,20 +1,16 @@
 /**
- * Silnik trybu ciemnego - obsługuje tryb "Filtr" i "Analiza"
+ * Silnik trybu ciemnego - filtr CSS (inwersja) na elemencie html
  */
 
 const DarkModeEngine = {
-  currentEngine: null,
   styleId: 'comet-dark-mode-style',
-  cache: new Map(),
 
   /**
    * Inicjalizuje silnik trybu ciemnego
-   * @param {string} engineType - Typ silnika: 'filter' lub 'analyze'
    * @param {object} config - Konfiguracja (brightness, contrast, sepia,
    *   saturation, hueRotate, grayscale)
    */
-  init(engineType, config = {}) {
-    this.currentEngine = engineType;
+  init(config = {}) {
     this.config = {
       brightness: config.brightness ?? 0,
       contrast: config.contrast ?? 100,
@@ -23,23 +19,13 @@ const DarkModeEngine = {
       hueRotate: config.hueRotate ?? 0,
       grayscale: config.grayscale ?? 0
     };
-
-    if (engineType === 'filter') {
-      this.initFilterMode();
-    } else if (engineType === 'analyze') {
-      this.initAnalyzeMode();
-    }
   },
 
   /**
    * Włącza tryb ciemny
    */
   enable() {
-    if (this.currentEngine === 'filter') {
-      this.enableFilterMode();
-    } else if (this.currentEngine === 'analyze') {
-      this.enableAnalyzeMode();
-    }
+    this.enableFilterMode();
   },
 
   /**
@@ -74,15 +60,7 @@ const DarkModeEngine = {
   },
 
   /**
-   * Inicjalizuje tryb "Filtr" (szybki)
-   */
-  initFilterMode() {
-    // Tryb filtr jest gotowy do użycia
-  },
-
-  /**
    * Buduje wartość właściwości `filter` na podstawie aktualnej konfiguracji.
-   * Wspólne dla trybu "Filtr" i "Analiza", aby oba respektowały te same suwaki.
    * @returns {string} Wartość dla CSS `filter`
    */
   buildFilterValue() {
@@ -155,87 +133,6 @@ const DarkModeEngine = {
     `;
 
     this.injectStyle(css);
-  },
-
-  /**
-   * Inicjalizuje tryb "Analiza" (dokładny)
-   */
-  initAnalyzeMode() {
-    // Lazy loading - analiza będzie wykonana przy pierwszym włączeniu
-  },
-
-  /**
-   * Włącza tryb "Analiza"
-   */
-  enableAnalyzeMode() {
-    // Użyj cache jeśli dostępny
-    // Klucz zawiera filtr, by zmiana suwaków nie zwracała starego CSS z cache
-    const cacheKey = `${window.location.href}|${this.buildFilterValue()}`;
-    if (this.cache.has(cacheKey)) {
-      const cachedCSS = this.cache.get(cacheKey);
-      this.injectStyle(cachedCSS);
-      return;
-    }
-
-    // Analizuj i generuj CSS
-    const css = this.analyzeAndGenerateCSS();
-    this.cache.set(cacheKey, css);
-    this.injectStyle(css);
-  },
-
-  /**
-   * Analizuje stronę i generuje dedykowane reguły CSS
-   * @returns {string} Wygenerowany CSS
-   */
-  analyzeAndGenerateCSS() {
-    const rules = [];
-
-    // Ten sam zestaw filtrów co tryb "Filtr" - respektuje wszystkie suwaki
-    // (jasność, kontrast, sepia, nasycenie, obrót odcienia, szarość).
-    const filterValue = this.buildFilterValue();
-
-    rules.push(`html { filter: ${filterValue} !important; }`);
-
-    // UWAGA: mimo nazwy "Analiza", tryb ten nie wykonuje jeszcze realnej analizy
-    // CSS per-element - używa filtra na html dla wydajności. Jedyną przewagą nad
-    // trybem "Filtr" jest cache CSS per URL (patrz enableAnalyzeMode). Realna
-    // analiza (generowanie dedykowanych reguł) pozostaje do zaimplementowania.
-
-    // Dodaj wykluczenia dla obrazów, wideo, iframe
-    rules.push(`
-      img, video, iframe, embed, object, canvas, svg,
-      [style*="background-image"], [style*="background: url"],
-      [style*="background-image: url"] {
-        filter: invert(1) hue-rotate(180deg) !important;
-      }
-    `);
-
-    // Elementy z przezroczystością - jak w trybie "Filtr"
-    rules.push(`
-      [style*="opacity"] {
-        filter: ${filterValue} !important;
-      }
-    `);
-
-    return rules.join('\n');
-  },
-
-  /**
-   * Generuje selektor CSS dla elementu
-   * @param {HTMLElement} el - Element
-   * @returns {string|null} Selektor CSS
-   */
-  getElementSelector(el) {
-    if (el.id) {
-      return `#${el.id}`;
-    }
-    if (el.className && typeof el.className === 'string') {
-      const classes = el.className.split(' ').filter(c => c).join('.');
-      if (classes) {
-        return `${el.tagName.toLowerCase()}.${classes}`;
-      }
-    }
-    return el.tagName.toLowerCase();
   },
 
   /**
@@ -315,21 +212,6 @@ const DarkModeEngine = {
       return true;
     }
     return false;
-  },
-
-  /**
-   * Czyści cache (przydatne przy zmianie strony)
-   */
-  clearCache() {
-    this.cache.clear();
-  },
-
-  /**
-   * Obsługuje dynamiczne zmiany treści (dla infinite scroll)
-   */
-  handleDynamicContent() {
-    // W trybie analizy, nowe elementy będą automatycznie obsłużone przez filtr na html
-    // W razie potrzeby można dodać MutationObserver
   }
 };
 

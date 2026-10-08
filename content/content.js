@@ -452,12 +452,11 @@
         grayscale: perDomainSettings?.grayscale ?? config.grayscale ?? 0
       };
 
-      const engineType = config.renderEngine || 'filter';
-      console.log('[Comet Dark Mode] Typ silnika:', engineType, 'Config:', engineConfig);
+      console.log('[Comet Dark Mode] Config:', engineConfig);
       
       if (typeof DarkModeEngine !== 'undefined') {
         console.log('[Comet Dark Mode] Używam DarkModeEngine');
-        DarkModeEngine.init(engineType, engineConfig);
+        DarkModeEngine.init(engineConfig);
         DarkModeEngine.enable();
         
         // Sprawdź czy style zostały wstrzyknięte
@@ -634,7 +633,7 @@
         const shouldBeActive = shouldBeActiveForDomain();
         
         // Sprawdź czy zmieniły się tylko parametry filtrów (nie enabled)
-        const filterKeys = ['brightness', 'contrast', 'sepia', 'saturation', 'hueRotate', 'grayscale', 'renderEngine'];
+        const filterKeys = ['brightness', 'contrast', 'sepia', 'saturation', 'hueRotate', 'grayscale'];
         const isFilterChange = Object.keys(changes).some(key => filterKeys.includes(key));
         const isEnabledChange = changes.enabled !== undefined;
 
@@ -799,13 +798,7 @@
 
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        // Jeśli tryb ciemny jest włączony i używamy trybu analizy,
-        // nowe elementy będą automatycznie obsłużone przez filtr na html
-        // W trybie filtra nie ma potrzeby dodatkowej obsługi
-        if (isEnabled && shouldBeActiveForDomain() && config.renderEngine === 'analyze') {
-          // Tryb analizy używa filtra na html, więc nowe elementy są automatycznie obsłużone
-          // Cache jest używany dla wydajności
-        }
+        // Nowe elementy są automatycznie obsłużone przez filtr na html
       }, debounceDelay);
     });
 
