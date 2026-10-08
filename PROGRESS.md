@@ -81,8 +81,15 @@
   repo ustawiony na noreply. `PRIVACY.md` (PL/EN, kontakt przez GitHub Issues) —
   link do sklepów: https://github.com/arcadiush/comet-dark-mode/blob/main/PRIVACY.md
 
+- **Wysłano do addons.mozilla.org** wersję 1.2.2 (formularz wypełniony przez Claude in Chrome
+  na prośbę użytkownika): opis PL, kategoria „Modyfikacje interfejsu”, wsparcie = GitHub Issues,
+  licencja MIT, bez polityki prywatności (brak zbierania danych), „bez narzędzi budujących”.
+  Publikacja do 24 h. Dodany plik `LICENSE` (MIT)
+
 ### Do zrobienia
-- Założyć konta (CWS: 5 USD, AMO: darmowe) i wgrać `dist/comet-dark-mode-1.2.2.zip` — robi użytkownik
+- AMO: po publikacji 1.2.2 wgrać `dist/comet-dark-mode-1.2.3.zip` jako aktualizację
+  i dodać zrzuty ze `store/images/` na stronie dodatku
+- Chrome Web Store: konto (5 USD) i zgłoszenie — teksty w `store/listing.md`
 - Podmienić wpis na blogu użytkownika (opis jednego silnika + nowy `opcje.png`)
 - README/CLAUDE obiecują „zachowuje oryginalne kolory obrazów” — w praktyce lekko się
   zmieniają (ograniczenie `hue-rotate`); złagodzić opis albo poprawić silnik
