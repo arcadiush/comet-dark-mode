@@ -13,8 +13,8 @@ Wersja PL jako główna, EN jako drugi język (oba sklepy pozwalają dodać tłu
 | Kategoria CWS | Ułatwienia dostępu (Accessibility) |
 | Kategoria AMO | Wygląd (Appearance) |
 | Licencja AMO | do wyboru przez autora (brak pliku LICENSE w repo) |
-| Strona domowa | do uzupełnienia (np. wpis na blogu) |
-| Polityka prywatności | adres, pod którym opublikujesz `store/privacy-policy.html` (repo jest prywatne — link do GitHuba nie zadziała). Przed publikacją wpisz e-mail w miejsce `[ADRES E-MAIL]` / `[E-MAIL ADDRESS]` |
+| Strona domowa | https://github.com/arcadiush/comet-dark-mode |
+| Polityka prywatności | https://github.com/arcadiush/comet-dark-mode/blob/main/PRIVACY.md (ta sama treść co `store/privacy-policy.html` — do hostowania gdzie indziej; zmieniać oba pliki razem) |
 | Grafiki | `store/images/` (zrzuty 1280×800, kafelek 440×280) |
 | Paczka | `./package.sh` → `dist/comet-dark-mode-<wersja>.zip` |
 
